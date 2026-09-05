@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dqrvq1m0j3d0d" path="res://pistol/gun.gd" id="1_b7uwb"]
 [ext_resource type="Texture2D" uid="uid://coon1w77o334i" path="res://pistol/pistol.png" id="1_kmld4"]
 [ext_resource type="PackedScene" uid="uid://bmo0auqbfad2o" path="res://pistol/bullet.tscn" id="2_donny"]
+[ext_resource type="PackedScene" uid="uid://c1b2kbuq1if08" path="res://pistol/muzzle_flash/muzzle_flash.tscn" id="3_enm2i"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o3jbo"]
 radius = 879.0142
@@ -14,6 +15,7 @@ script = ExtResource("1_b7uwb")
 projectile_spawnpoint = NodePath("WeaponAnchor/Pistol/ProjectileSpawnpoint")
 fire_timer = NodePath("FireTimer")
 projectile = ExtResource("2_donny")
+muzzle_flash = ExtResource("3_enm2i")
 
 [node name="FireTimer" type="Timer" parent="." unique_id=466582412]
 wait_time = 0.3

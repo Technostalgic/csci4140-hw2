@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://clrbl4p00uk0" path="res://pistol/bullet.gd" id="1_5tgod"]
 [ext_resource type="Texture2D" uid="uid://bd4rrqj72amnx" path="res://pistol/projectile.png" id="1_mt7ak"]
+[ext_resource type="PackedScene" uid="uid://kcl4efkvrany" path="res://pistol/impact/impact.tscn" id="2_ucxth"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o3jbo"]
 radius = 14.0
@@ -10,6 +11,7 @@ radius = 14.0
 collision_layer = 0
 collision_mask = 3
 script = ExtResource("1_5tgod")
+impact = ExtResource("2_ucxth")
 speed = 1200.0
 
 [node name="Projectile" type="Sprite2D" parent="." unique_id=1858120656]

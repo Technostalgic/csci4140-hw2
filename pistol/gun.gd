@@ -4,6 +4,7 @@ var overlapping_mobs: Array[CharacterBody2D] = []
 @export var projectile_spawnpoint: Marker2D = null
 @export var fire_timer: Timer = null
 @export var projectile: PackedScene = null
+@export var muzzle_flash: PackedScene = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -42,6 +43,9 @@ func get_closest_mob() -> CharacterBody2D:
 	return closest_mob
 
 func fire() -> void:
+	var flash: Node2D = muzzle_flash.instantiate()
+	projectile_spawnpoint.add_child(flash)
+	flash.position = Vector2.ZERO
 	var bullet: Bullet = projectile.instantiate()
 	get_tree().root.add_child(bullet)
 	bullet.global_position = projectile_spawnpoint.global_position
