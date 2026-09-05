@@ -2,5 +2,5 @@
 
 ## Credit:
 
-* Asset pack, including visuals for all characters and trees and slime death effect:
-https://www.gdquest.com/library/first_2d_game_godot4_vampire_survivor/  
+* Asset pack, including visuals for all characters and trees and slime death effect -
+[GDQuest Tutorial Assets](https://www.gdquest.com/library/first_2d_game_godot4_vampire_survivor/)  
