@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 var hero: Hero = null
 @export var slime_node: Node2D = null
+@export var death_fx: PackedScene = null
 @export var movement_speed: float = 300
 @export var health: float = 3
 
@@ -18,4 +19,7 @@ func _physics_process(delta: float) -> void:
 func take_damage(damage: float) -> void:
 	health -= damage
 	if health <= 0:
+		var effect: Node2D = death_fx.instantiate()
+		get_tree().root.add_child(effect)
+		effect.global_position = global_position
 		queue_free()
