@@ -1,11 +1,8 @@
+class_name Hero
 extends CharacterBody2D
 
 @export var happy_boo: Node2D = null
 @export var movement_speed: float = 600
-
-const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
-
 
 func _physics_process(delta: float) -> void:
 	var movement = Input.get_vector(

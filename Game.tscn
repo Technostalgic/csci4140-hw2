@@ -1,8 +1,22 @@
 [gd_scene format=3 uid="uid://b3u84076due2"]
 
 [ext_resource type="PackedScene" uid="uid://dt4xwrmw805uf" path="res://characters/hero.tscn" id="1_wbfu4"]
+[ext_resource type="Script" uid="uid://chm5wgj0vr7r" path="res://game.gd" id="1_xkndl"]
+[ext_resource type="PackedScene" uid="uid://m08413nlk87o" path="res://characters/mob.tscn" id="3_u44n3"]
 
-[node name="Game" type="Node2D" unique_id=801271642]
+[node name="Game" type="Node2D" unique_id=801271642 node_paths=PackedStringArray("hero")]
+y_sort_enabled = true
+script = ExtResource("1_xkndl")
+hero = NodePath("Hero")
 
 [node name="Hero" parent="." unique_id=1506529082 instance=ExtResource("1_wbfu4")]
 position = Vector2(929, 492)
+
+[node name="Mob" parent="." unique_id=1795532236 instance=ExtResource("3_u44n3")]
+position = Vector2(1372, 332)
+
+[node name="Mob2" parent="." unique_id=1573666717 instance=ExtResource("3_u44n3")]
+position = Vector2(1065, 956)
+
+[node name="Mob3" parent="." unique_id=707873532 instance=ExtResource("3_u44n3")]
+position = Vector2(594, 315)
