@@ -29,5 +29,5 @@ debug_color = Color(0.9882353, 0.2509804, 0.32941177, 0.41960785)
 shape = SubResource("CircleShape2D_o3jbo")
 
 [node name="Gun" parent="." unique_id=628232303 instance=ExtResource("3_t4k1q")]
-position = Vector2(0, -29)
+position = Vector2(0, -42)
 collision_mask = 3

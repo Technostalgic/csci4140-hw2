@@ -4,6 +4,7 @@ extends CharacterBody2D
 var hero: Hero = null
 @export var slime_node: Node2D = null
 @export var movement_speed: float = 300
+@export var health: float = 3
 
 func _ready() -> void:
 	hero = Game.instance.hero
@@ -13,3 +14,8 @@ func _physics_process(delta: float) -> void:
 	var direction := (hero.global_position - global_position).normalized()
 	velocity = direction * movement_speed
 	move_and_slide()
+
+func take_damage(damage: float) -> void:
+	health -= damage
+	if health <= 0:
+		queue_free()

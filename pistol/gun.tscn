@@ -2,14 +2,22 @@
 
 [ext_resource type="Script" uid="uid://dqrvq1m0j3d0d" path="res://pistol/gun.gd" id="1_b7uwb"]
 [ext_resource type="Texture2D" uid="uid://coon1w77o334i" path="res://pistol/pistol.png" id="1_kmld4"]
+[ext_resource type="PackedScene" uid="uid://bmo0auqbfad2o" path="res://pistol/bullet.tscn" id="2_donny"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o3jbo"]
 radius = 879.0142
 
-[node name="Gun" type="Area2D" unique_id=628232303]
+[node name="Gun" type="Area2D" unique_id=628232303 node_paths=PackedStringArray("projectile_spawnpoint", "fire_timer")]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_b7uwb")
+projectile_spawnpoint = NodePath("WeaponAnchor/Pistol/ProjectileSpawnpoint")
+fire_timer = NodePath("FireTimer")
+projectile = ExtResource("2_donny")
+
+[node name="FireTimer" type="Timer" parent="." unique_id=466582412]
+wait_time = 0.3
+autostart = true
 
 [node name="WeaponAnchor" type="Marker2D" parent="." unique_id=471340787]
 position = Vector2(55, 0)
@@ -26,3 +34,4 @@ shape = SubResource("CircleShape2D_o3jbo")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="timeout" from="FireTimer" to="." method="_on_fire_timer_timeout"]
