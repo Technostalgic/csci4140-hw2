@@ -1,6 +1,7 @@
 class_name Bullet
 extends Area2D
 
+var lifetime: float = 5
 @export var impact: PackedScene = null
 @export var speed: float = 1000
 @export var damage: float = 1
@@ -8,6 +9,9 @@ extends Area2D
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	global_position += transform.basis_xform(Vector2.RIGHT) * speed * delta
+	lifetime -= delta
+	if lifetime <= 0:
+		queue_free()
 
 
 func _on_body_entered(body: Node2D) -> void:
