@@ -7,6 +7,8 @@
 radius = 46.389652
 
 [node name="Mob" type="CharacterBody2D" unique_id=1795532236 node_paths=PackedStringArray("slime_node")]
+collision_layer = 2
+collision_mask = 3
 script = ExtResource("1_xtcgg")
 slime_node = NodePath("Slime")
 
