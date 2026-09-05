@@ -1,4 +1,4 @@
-## Game for CSCI 4140, Homework 2
+# Game for CSCI 4140, Homework 2
 
 ## Credit:
 

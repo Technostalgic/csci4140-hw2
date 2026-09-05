@@ -9,8 +9,9 @@ radius = 40.04997
 [sub_resource type="CircleShape2D" id="CircleShape2D_o3jbo"]
 radius = 30.066593
 
-[node name="Hero" type="CharacterBody2D" unique_id=1506529082]
+[node name="Hero" type="CharacterBody2D" unique_id=1506529082 node_paths=PackedStringArray("happy_boo")]
 script = ExtResource("1_0cirb")
+happy_boo = NodePath("HappyBoo")
 
 [node name="HappyBoo" parent="." unique_id=1091727253 instance=ExtResource("1_780bu")]
 
