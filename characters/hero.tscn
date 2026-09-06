@@ -10,18 +10,27 @@ radius = 40.04997
 [sub_resource type="CircleShape2D" id="CircleShape2D_o3jbo"]
 radius = 30.066593
 
-[node name="Hero" type="CharacterBody2D" unique_id=1506529082 node_paths=PackedStringArray("happy_boo")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t4k1q"]
+bg_color = Color(0.31924382, 0.7059462, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="Hero" type="CharacterBody2D" unique_id=1506529082 node_paths=PackedStringArray("hurtbox", "health_bar", "happy_boo")]
 collision_mask = 3
 script = ExtResource("1_0cirb")
+hurtbox = NodePath("Hurtbox")
+health_bar = NodePath("Healthbar")
 happy_boo = NodePath("HappyBoo")
 
 [node name="HappyBoo" parent="." unique_id=1091727253 instance=ExtResource("1_780bu")]
 
-[node name="Area2D" type="Area2D" parent="." unique_id=50691794]
+[node name="Hurtbox" type="Area2D" parent="." unique_id=50691794]
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=175395050]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=175395050]
 shape = SubResource("CircleShape2D_i738u")
 debug_color = Color(0.9882353, 0.2509804, 0.32941177, 0.41960785)
 
@@ -31,3 +40,13 @@ shape = SubResource("CircleShape2D_o3jbo")
 [node name="Gun" parent="." unique_id=628232303 instance=ExtResource("3_t4k1q")]
 position = Vector2(0, -42)
 collision_mask = 3
+
+[node name="Healthbar" type="ProgressBar" parent="." unique_id=249806137]
+anchors_preset = -1
+offset_left = -100.0
+offset_top = -166.0
+offset_right = 100.0
+offset_bottom = -139.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_t4k1q")
+value = 65.74
+show_percentage = false
