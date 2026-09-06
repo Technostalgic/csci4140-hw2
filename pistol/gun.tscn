@@ -22,14 +22,14 @@ wait_time = 0.3
 autostart = true
 
 [node name="WeaponAnchor" type="Marker2D" parent="." unique_id=471340787]
-position = Vector2(55, 0)
+position = Vector2(38, 5)
 
 [node name="Pistol" type="Sprite2D" parent="WeaponAnchor" unique_id=1924386464]
 position = Vector2(18, -6)
 texture = ExtResource("1_kmld4")
 
 [node name="ProjectileSpawnpoint" type="Marker2D" parent="WeaponAnchor/Pistol" unique_id=1161980563]
-position = Vector2(25, -11)
+position = Vector2(20, -10)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1918627750]
 visible = false

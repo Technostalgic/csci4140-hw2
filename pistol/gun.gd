@@ -1,7 +1,9 @@
+class_name Gun
 extends Area2D
 
 var overlapping_mobs: Array[CharacterBody2D] = []
 var ready_to_fire: bool = false
+var fire_rate: float = 0.3
 @export var projectile_spawnpoint: Marker2D = null
 @export var fire_timer: Timer = null
 @export var projectile: PackedScene = null
@@ -19,9 +21,8 @@ func _process(delta: float) -> void:
 	if Input.is_action_pressed("Shoot"):
 		if ready_to_fire:
 			fire()
-			fire_timer.start()
 		if fire_timer.is_stopped():
-			fire_timer.start()
+			fire_timer.start(fire_rate)
 	
 	var difference: Vector2 = get_global_mouse_position() - global_position
 	var direction := atan2(difference.y, difference.x)
@@ -55,8 +56,6 @@ func fire() -> void:
 	get_tree().root.add_child(bullet)
 	bullet.global_position = projectile_spawnpoint.global_position
 	bullet.global_rotation = projectile_spawnpoint.global_rotation
-	if fire_timer.is_stopped():
-		fire_timer.start()
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is Mob:
