@@ -1,6 +1,7 @@
 extends Area2D
 
 var overlapping_mobs: Array[CharacterBody2D] = []
+var ready_to_fire: bool = false
 @export var projectile_spawnpoint: Marker2D = null
 @export var fire_timer: Timer = null
 @export var projectile: PackedScene = null
@@ -13,20 +14,23 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	var closest_mob = get_closest_mob()
-	if closest_mob == null:
-		fire_timer.stop()
-	else:
+	
+	# handle whether or not the gun should be firing
+	if Input.is_action_pressed("Shoot"):
+		if ready_to_fire:
+			fire()
+			fire_timer.start()
 		if fire_timer.is_stopped():
 			fire_timer.start()
-		var difference: Vector2 = closest_mob.global_position - global_position
-		var direction := atan2(difference.y, difference.x)
-		global_rotation = direction
-		
-		if direction > PI * 0.5 or direction < -PI * 0.5:
-			scale.y = -1
-		else:
-			scale.y = 1
+	
+	var difference: Vector2 = get_global_mouse_position() - global_position
+	var direction := atan2(difference.y, difference.x)
+	global_rotation = direction
+	
+	if direction > PI * 0.5 or direction < -PI * 0.5:
+		scale.y = -1
+	else:
+		scale.y = 1
 
 
 func get_closest_mob() -> CharacterBody2D:
@@ -43,6 +47,7 @@ func get_closest_mob() -> CharacterBody2D:
 	return closest_mob
 
 func fire() -> void:
+	ready_to_fire = false
 	var flash: Node2D = muzzle_flash.instantiate()
 	projectile_spawnpoint.add_child(flash)
 	flash.position = Vector2.ZERO
@@ -66,4 +71,5 @@ func _on_body_exited(body: Node2D) -> void:
 
 
 func _on_fire_timer_timeout() -> void:
-	fire()
+	ready_to_fire = true
+	fire_timer.stop()
