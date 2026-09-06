@@ -1,6 +1,14 @@
 # Game for CSCI 4140, Homework 2
 
+This homework assignment had us follow a [GDQuest tutorial video](https://www.youtube.com/watch?v=GwCiGixlqiU) about how to make a simple vampire survivors style top down shooter game.
+
 ## Changes:
+
+1. Make weapon fire by player input instead of auto-aim/shoot  
+
+1. Increase weapon fire rate while standing still  
+
+1. Add gameplay music loop  
 
 ## Credit:
 
