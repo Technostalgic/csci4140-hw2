@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://chm5wgj0vr7r" path="res://game.gd" id="1_xkndl"]
 [ext_resource type="PackedScene" uid="uid://m08413nlk87o" path="res://characters/mob.tscn" id="3_u44n3"]
 [ext_resource type="PackedScene" uid="uid://cjfdkan3x1u0o" path="res://trees/tree.tscn" id="4_sb48q"]
+[ext_resource type="AudioStream" uid="uid://g5j5576qqned" path="res://AiHolocaust.wav" id="5_t88pq"]
 
 [sub_resource type="Curve2D" id="Curve2D_u44n3"]
 _data = {
@@ -99,6 +100,10 @@ position = Vector2(526, 684)
 
 [node name="Tree8" parent="." unique_id=1022609984 instance=ExtResource("4_sb48q")]
 position = Vector2(1467, 869)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1714095164]
+stream = ExtResource("5_t88pq")
+autoplay = true
 
 [connection signal="die" from="Hero" to="." method="_on_hero_die"]
 [connection signal="timeout" from="SpawnTimer" to="." method="spawn_mob"]
