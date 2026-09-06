@@ -18,6 +18,7 @@ func _physics_process(delta: float) -> void:
 
 func take_damage(damage: float) -> void:
 	health -= damage
+	slime_node.play_hurt()
 	if health <= 0:
 		var effect: Node2D = death_fx.instantiate()
 		get_tree().root.add_child(effect)
