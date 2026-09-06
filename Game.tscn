@@ -4,10 +4,18 @@
 [ext_resource type="Script" uid="uid://chm5wgj0vr7r" path="res://game.gd" id="1_xkndl"]
 [ext_resource type="PackedScene" uid="uid://m08413nlk87o" path="res://characters/mob.tscn" id="3_u44n3"]
 
-[node name="Game" type="Node2D" unique_id=801271642 node_paths=PackedStringArray("hero")]
+[sub_resource type="Curve2D" id="Curve2D_u44n3"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -135, -160, 0, 0, 0, 0, 2035, -160, 0, 0, 0, 0, 2035, 1220, 0, 0, 0, 0, -135, 1220, 0, 0, 0, 0, -135, -160)
+}
+point_count = 5
+
+[node name="Game" type="Node2D" unique_id=801271642 node_paths=PackedStringArray("hero", "slime_spawner")]
 y_sort_enabled = true
 script = ExtResource("1_xkndl")
 hero = NodePath("Hero")
+slime_spawner = NodePath("SpawnPath/PathSpawner")
+slime_scene = ExtResource("3_u44n3")
 
 [node name="Hero" parent="." unique_id=1506529082 instance=ExtResource("1_wbfu4")]
 position = Vector2(929, 492)
@@ -20,3 +28,18 @@ position = Vector2(1065, 956)
 
 [node name="Mob3" parent="." unique_id=707873532 instance=ExtResource("3_u44n3")]
 position = Vector2(594, 315)
+
+[node name="SpawnPath" type="Path2D" parent="." unique_id=1335888819]
+curve = SubResource("Curve2D_u44n3")
+
+[node name="PathSpawner" type="PathFollow2D" parent="SpawnPath" unique_id=1370164637]
+position = Vector2(-135, -160)
+rotates = false
+cubic_interp = false
+loop = false
+
+[node name="SpawnTimer" type="Timer" parent="." unique_id=920829315]
+wait_time = 0.3
+autostart = true
+
+[connection signal="timeout" from="SpawnTimer" to="." method="spawn_mob"]

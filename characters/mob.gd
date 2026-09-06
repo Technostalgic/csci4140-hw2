@@ -5,7 +5,7 @@ var hero: Hero = null
 @export var slime_node: Node2D = null
 @export var death_fx: PackedScene = null
 @export var movement_speed: float = 300
-@export var health: float = 3
+@export var health: float = 2
 
 func _ready() -> void:
 	hero = Game.instance.hero
