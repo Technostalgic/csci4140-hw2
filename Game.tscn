@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dt4xwrmw805uf" path="res://characters/hero.tscn" id="1_wbfu4"]
 [ext_resource type="Script" uid="uid://chm5wgj0vr7r" path="res://game.gd" id="1_xkndl"]
 [ext_resource type="PackedScene" uid="uid://m08413nlk87o" path="res://characters/mob.tscn" id="3_u44n3"]
+[ext_resource type="PackedScene" uid="uid://cjfdkan3x1u0o" path="res://trees/tree.tscn" id="4_sb48q"]
 
 [sub_resource type="Curve2D" id="Curve2D_u44n3"]
 _data = {
@@ -10,12 +11,51 @@ _data = {
 }
 point_count = 5
 
-[node name="Game" type="Node2D" unique_id=801271642 node_paths=PackedStringArray("hero", "slime_spawner")]
+[node name="Game" type="Node2D" unique_id=801271642 node_paths=PackedStringArray("gameover_screen", "hero", "slime_spawner")]
 y_sort_enabled = true
 script = ExtResource("1_xkndl")
+gameover_screen = NodePath("GameOverCanvas")
 hero = NodePath("Hero")
 slime_spawner = NodePath("Hero/Camera2D/SpawnPath/PathSpawner")
 slime_scene = ExtResource("3_u44n3")
+
+[node name="GameOverCanvas" type="CanvasLayer" parent="." unique_id=1203432412]
+visible = false
+
+[node name="Background" type="ColorRect" parent="GameOverCanvas" unique_id=2130205648]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.40784314)
+
+[node name="GameOverText" type="Label" parent="GameOverCanvas/Background" unique_id=1453005495]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -46.0
+offset_top = -11.5
+offset_right = 46.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 100
+text = "Game Over!"
+
+[node name="GroundCanvas" type="CanvasLayer" parent="." unique_id=20825355]
+layer = -1
+
+[node name="Ground" type="ColorRect" parent="GroundCanvas" unique_id=2072284756]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.5069161, 0.57526225, 0.63503057, 1)
 
 [node name="Hero" parent="." unique_id=1506529082 instance=ExtResource("1_wbfu4")]
 position = Vector2(929, 492)
@@ -36,4 +76,29 @@ loop = false
 wait_time = 0.3
 autostart = true
 
+[node name="Tree" parent="." unique_id=1716713896 instance=ExtResource("4_sb48q")]
+position = Vector2(438, 280)
+
+[node name="Tree2" parent="." unique_id=1161008693 instance=ExtResource("4_sb48q")]
+position = Vector2(752, 132)
+
+[node name="Tree3" parent="." unique_id=690230934 instance=ExtResource("4_sb48q")]
+position = Vector2(1460, 324)
+
+[node name="Tree4" parent="." unique_id=1178045182 instance=ExtResource("4_sb48q")]
+position = Vector2(1125, 44)
+
+[node name="Tree5" parent="." unique_id=438296169 instance=ExtResource("4_sb48q")]
+position = Vector2(280, -260)
+
+[node name="Tree6" parent="." unique_id=1675961423 instance=ExtResource("4_sb48q")]
+position = Vector2(2, 212)
+
+[node name="Tree7" parent="." unique_id=1871695906 instance=ExtResource("4_sb48q")]
+position = Vector2(526, 684)
+
+[node name="Tree8" parent="." unique_id=1022609984 instance=ExtResource("4_sb48q")]
+position = Vector2(1467, 869)
+
+[connection signal="die" from="Hero" to="." method="_on_hero_die"]
 [connection signal="timeout" from="SpawnTimer" to="." method="spawn_mob"]

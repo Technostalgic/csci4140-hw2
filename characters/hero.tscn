@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b77tfnmyicptp" path="res://characters/hero.gd" id="1_0cirb"]
 [ext_resource type="PackedScene" uid="uid://pbmyh1qru7p" path="res://characters/happy_boo/happy_boo.tscn" id="1_780bu"]
+[ext_resource type="Texture2D" uid="uid://dk5b8a84a6n2h" path="res://characters/ground_shadow.png" id="3_hsbtt"]
 [ext_resource type="PackedScene" uid="uid://dl8tiw1bpd1nt" path="res://pistol/gun.tscn" id="3_t4k1q"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_i738u"]
@@ -11,7 +12,7 @@ radius = 40.04997
 radius = 30.066593
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t4k1q"]
-bg_color = Color(0.31924382, 0.7059462, 0, 1)
+bg_color = Color(0.40542105, 0.88510203, 1.540184e-06, 1)
 corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
@@ -26,7 +27,13 @@ happy_boo = NodePath("HappyBoo")
 
 [node name="HappyBoo" parent="." unique_id=1091727253 instance=ExtResource("1_780bu")]
 
+[node name="Shadow" type="Sprite2D" parent="HappyBoo" unique_id=733307799]
+modulate = Color(0, 0, 0, 0.2901961)
+z_index = -1
+texture = ExtResource("3_hsbtt")
+
 [node name="Hurtbox" type="Area2D" parent="." unique_id=50691794]
+visible = false
 collision_layer = 0
 collision_mask = 2
 
@@ -35,6 +42,7 @@ shape = SubResource("CircleShape2D_i738u")
 debug_color = Color(0.9882353, 0.2509804, 0.32941177, 0.41960785)
 
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=748135381]
+visible = false
 shape = SubResource("CircleShape2D_o3jbo")
 
 [node name="Gun" parent="." unique_id=628232303 instance=ExtResource("3_t4k1q")]
@@ -48,5 +56,5 @@ offset_top = -166.0
 offset_right = 100.0
 offset_bottom = -139.0
 theme_override_styles/fill = SubResource("StyleBoxFlat_t4k1q")
-value = 65.74
+value = 100.0
 show_percentage = false
