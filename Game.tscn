@@ -101,7 +101,7 @@ position = Vector2(526, 684)
 [node name="Tree8" parent="." unique_id=1022609984 instance=ExtResource("4_sb48q")]
 position = Vector2(1467, 869)
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1714095164]
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=1714095164]
 stream = ExtResource("5_t88pq")
 autoplay = true
 
