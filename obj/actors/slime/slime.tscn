@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ogik4s70pgwl"]
 
 [ext_resource type="Texture2D" uid="uid://c2t1crng7t58l" path="res://content/gfx/slime/slime_body.png" id="1_3j35h"]
-[ext_resource type="Script" uid="uid://dnbjp2524b1py" path="res://src/actors/slime.gd" id="1_87y5x"]
+[ext_resource type="Script" uid="uid://dnbjp2524b1py" path="res://src/actors/mob_graphic.gd" id="1_87y5x"]
 [ext_resource type="Texture2D" uid="uid://bnd4gurtidin" path="res://content/gfx/slime/slime_face.png" id="2_ygydt"]
 [ext_resource type="Texture2D" uid="uid://e4gtsguue7fg" path="res://content/gfx/slime/slime_body_hurt.png" id="4_0qu0c"]
 [ext_resource type="Texture2D" uid="uid://c7rt25t421lnf" path="res://content/gfx/slime/slime_hurt_eyes.png" id="4_hi70h"]
@@ -210,8 +210,9 @@ _data = {
 &"walk": SubResource("Animation_l6fy2")
 }
 
-[node name="Slime" type="Node2D" unique_id=2008890567]
+[node name="Slime" type="Node2D" unique_id=2008890567 node_paths=PackedStringArray("animation_player")]
 script = ExtResource("1_87y5x")
+animation_player = NodePath("AnimationPlayer")
 
 [node name="Anchor" type="Marker2D" parent="." unique_id=794902193]
 

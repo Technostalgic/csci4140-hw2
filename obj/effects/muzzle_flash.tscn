@@ -3,8 +3,9 @@
 [ext_resource type="Script" uid="uid://6ej4465c3oxu" path="res://src/effects/muzzle_flash.gd" id="1_wouey"]
 [ext_resource type="Texture2D" uid="uid://dolhmqjpblfpv" path="res://content/gfx/muzzle_flash.png" id="2_6pgu4"]
 
-[node name="MuzzleFlash" type="Node2D" unique_id=1628795163]
+[node name="MuzzleFlash" type="Node2D" unique_id=1628795163 node_paths=PackedStringArray("sprite")]
 script = ExtResource("1_wouey")
+sprite = NodePath("Sprite")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=673211911]
 unique_name_in_owner = true

@@ -3,9 +3,10 @@
 [ext_resource type="Script" uid="uid://de6y8t2sf6ynh" path="res://src/effects/impact.gd" id="1_4vum2"]
 [ext_resource type="Texture2D" uid="uid://ca0823iqg8dep" path="res://content/gfx/circle.png" id="2_wp1di"]
 
-[node name="Impact" type="Node2D" unique_id=1086043160]
+[node name="Impact" type="Node2D" unique_id=1086043160 node_paths=PackedStringArray("sprite")]
 top_level = true
 script = ExtResource("1_4vum2")
+sprite = NodePath("Sprite")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=671936667]
 unique_name_in_owner = true

@@ -1,7 +1,7 @@
+class_name MuzzleFlash
 extends Node2D
 
-@onready var sprite = %Sprite
-
+@export var sprite: Sprite2D = null
 
 func _ready():
 	var tween = create_tween().set_parallel(true).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)

@@ -120,9 +120,11 @@ _data = {
 &"explosion": SubResource("Animation_viyco")
 }
 
-[node name="SmokeExplosion" type="Node2D" unique_id=675191270]
+[node name="SmokeExplosion" type="Node2D" unique_id=675191270 node_paths=PackedStringArray("animation_player", "smoke")]
 z_index = 10
 script = ExtResource("1_kb8ql")
+animation_player = NodePath("AnimationPlayer")
+smoke = NodePath("Smoke")
 
 [node name="Smoke" type="ColorRect" parent="." unique_id=1026069877]
 unique_name_in_owner = true

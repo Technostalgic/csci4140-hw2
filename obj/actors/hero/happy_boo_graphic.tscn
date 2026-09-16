@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://pbmyh1qru7p"]
 
-[ext_resource type="Script" uid="uid://bj7buyff1tobm" path="res://src/actors/happy_boo.gd" id="1_kg7lb"]
+[ext_resource type="Script" uid="uid://bj7buyff1tobm" path="res://src/actors/hero_graphic.gd" id="1_kg7lb"]
 [ext_resource type="Texture2D" uid="uid://b3e4kkrfbvr1g" path="res://content/gfx/hero/square_foot.png" id="3_186qq"]
 [ext_resource type="Texture2D" uid="uid://cdfpnrd7unfym" path="res://content/gfx/hero/square_lower_leg.png" id="4_plnsd"]
 [ext_resource type="Texture2D" uid="uid://dgd62havw7eu8" path="res://content/gfx/hero/square_upper_leg.png" id="5_q2t1e"]
@@ -579,8 +579,9 @@ _data = {
 &"walk": SubResource("Animation_74kqe")
 }
 
-[node name="HappyBoo" type="Node2D" unique_id=1091727253]
+[node name="HappyBoo" type="Node2D" unique_id=1091727253 node_paths=PackedStringArray("animation_player")]
 script = ExtResource("1_kg7lb")
+animation_player = NodePath("AnimationPlayer")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1967949679]
 unique_name_in_owner = true
