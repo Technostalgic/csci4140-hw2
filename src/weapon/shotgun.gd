@@ -1,31 +1,40 @@
 class_name Shotgun
 extends Gun
 
+@export var raycast: RayCast2D = null
 @export var bullets_per_shot: int = 6
-@export_flags_2d_physics var enemy_mask: int = 2
 @export var spread: float = PI / 8
 @export_range(0, 1) var evenly_spread_factor: float = 0.8
-
-var _debug_lines: Array[Line2D] = []
+@export var weapon_range: float = 1000
+@export var damage: float = 1
+@export var environmental_impact_effect: PackedScene = null
 
 func _fire_shot(direction: float):
-	var line := Line2D.new()
-	line.points = PackedVector2Array([
-		Vector2.ZERO,
-		Vector2(1000, 0)
-	])
-	line.width = 2
-	line.default_color = Color("gold")
-	add_child(line)
-	line.global_position = projectile_spawnpoint.global_position
-	line.global_rotation = direction
-	_debug_lines.push_back(line)
+	var endpoint = Vector2.from_angle(direction - projectile_spawnpoint.global_rotation) * weapon_range
+	raycast.target_position = endpoint
+	raycast.force_raycast_update()
+	
+	if raycast.is_colliding():
+		var hit_obj := raycast.get_collider()
+		if hit_obj is Mob:
+			var mob := hit_obj as Mob
+			if mob.health <= 0:
+				raycast.add_exception(mob)
+				_fire_shot(direction)
+				return
+			mob.take_damage(damage)
+		
+		var impact := environmental_impact_effect.instantiate() as Node2D
+		get_tree().root.add_child(impact)
+		impact.global_position = raycast.get_collision_point()
 
 func fire():
-	for line in _debug_lines:
-		line.queue_free()
-	_debug_lines.clear()
-		
+	
+	# reset the raycast
+	raycast.clear_exceptions()
+	raycast.global_position = projectile_spawnpoint.global_position
+	
+	# fire a bullet across a random spread for each bullet in bullets_per_shot
 	var spread_delta := (spread * evenly_spread_factor) / bullets_per_shot as float
 	for i in range(bullets_per_shot):
 		var direction_offset := (i - bullets_per_shot * 0.5 + 0.5) * spread_delta

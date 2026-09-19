@@ -1,13 +1,17 @@
 [gd_scene format=3 uid="uid://cwyjwkmbi18nf"]
 
 [ext_resource type="Script" uid="uid://pyxu55nhookm" path="res://src/weapon/shotgun.gd" id="1_36h01"]
+[ext_resource type="PackedScene" uid="uid://kcl4efkvrany" path="res://obj/effects/impact.tscn" id="2_41mpv"]
 [ext_resource type="Texture2D" uid="uid://coon1w77o334i" path="res://content/gfx/pistol.png" id="4_owrpd"]
 
-[node name="Shotgun" type="Node2D" unique_id=1703651934 node_paths=PackedStringArray("projectile_spawnpoint", "fire_timer")]
+[node name="Shotgun" type="Node2D" unique_id=1703651934 node_paths=PackedStringArray("raycast", "projectile_spawnpoint", "fire_timer")]
 script = ExtResource("1_36h01")
+raycast = NodePath("Raycast")
+damage = 0.5
+environmental_impact_effect = ExtResource("2_41mpv")
 projectile_spawnpoint = NodePath("WeaponAnchor/ShotgunGraphic/ProjectileSpawnpoint")
 fire_timer = NodePath("FireTimer")
-fire_rate = 0.05
+fire_rate = 0.25
 metadata/_custom_type_script = "uid://pyxu55nhookm"
 
 [node name="FireTimer" type="Timer" parent="." unique_id=466582412]
@@ -23,3 +27,7 @@ texture = ExtResource("4_owrpd")
 
 [node name="ProjectileSpawnpoint" type="Marker2D" parent="WeaponAnchor/ShotgunGraphic" unique_id=1161980563]
 position = Vector2(20, -10)
+
+[node name="Raycast" type="RayCast2D" parent="." unique_id=448148110]
+collision_mask = 2
+hit_from_inside = true
