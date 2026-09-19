@@ -24,34 +24,88 @@ slime_scene = ExtResource("2_4v0g2")
 
 [node name="UiCanvas" type="CanvasLayer" parent="." unique_id=1203432412]
 
-[node name="GameOver" type="ColorRect" parent="UiCanvas" unique_id=2130205648 node_paths=PackedStringArray("hero", "music")]
+[node name="Container" type="Control" parent="UiCanvas" unique_id=2121102391]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-offset_transform_enabled = true
-color = Color(0, 0, 0, 0.40784314)
-script = ExtResource("3_4v0g2")
-hero = NodePath("../../Hero")
-sound_effect = ExtResource("4_08rg1")
-music = NodePath("../../Music")
 
-[node name="GameOverText" type="Label" parent="UiCanvas/GameOver" unique_id=1453005495]
+[node name="GameOver" type="Panel" parent="UiCanvas/Container" unique_id=1086421409 node_paths=PackedStringArray("kills_value_text", "music")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -200.0
+offset_right = 400.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+script = ExtResource("3_4v0g2")
+kills_value_text = NodePath("HBoxContainer/KillsValue")
+sound_effect = ExtResource("4_08rg1")
+music = NodePath("../../../Music")
+
+[node name="GameOverText" type="Label" parent="UiCanvas/Container/GameOver" unique_id=1453005495]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -46.0
-offset_top = -11.5
-offset_right = 46.0
-offset_bottom = 11.5
+offset_left = -285.0
+offset_top = -140.0
+offset_right = 285.0
+offset_bottom = -2.999817
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 100
 text = "Game Over!"
+
+[node name="RetryButton" type="Button" parent="UiCanvas/Container/GameOver" unique_id=435603079]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -25.0
+offset_top = -75.0
+offset_right = 25.0
+offset_bottom = -44.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "Retry"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UiCanvas/Container/GameOver" unique_id=1805904549]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="KillsLabel" type="Label" parent="UiCanvas/Container/GameOver/HBoxContainer" unique_id=1224345455]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Kills: "
+
+[node name="KillsValue" type="Label" parent="UiCanvas/Container/GameOver/HBoxContainer" unique_id=1929944039]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "50"
 
 [node name="GroundCanvas" type="CanvasLayer" parent="." unique_id=20825355]
 layer = -1
@@ -111,4 +165,5 @@ position = Vector2(1467, 869)
 stream = ExtResource("5_1nq40")
 autoplay = true
 
+[connection signal="pressed" from="UiCanvas/Container/GameOver/RetryButton" to="UiCanvas/Container/GameOver" method="_retry_level"]
 [connection signal="timeout" from="SpawnTimer" to="." method="spawn_mob"]

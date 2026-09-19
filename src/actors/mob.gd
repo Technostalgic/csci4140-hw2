@@ -11,7 +11,8 @@ func _ready() -> void:
 	hero = Game.instance.hero
 	slime_node.play_walk()
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
+	if not hero: return
 	var direction := (hero.global_position - global_position).normalized()
 	velocity = direction * movement_speed
 	move_and_slide()
@@ -20,7 +21,12 @@ func take_damage(damage: float) -> void:
 	health -= damage
 	slime_node.play_hurt()
 	if health <= 0:
-		var effect: Node2D = death_fx.instantiate()
-		get_tree().root.add_child(effect)
-		effect.global_position = global_position
-		queue_free()
+		kill()
+
+func kill() -> void:
+	var effect: Node2D = death_fx.instantiate()
+	get_tree().root.add_child(effect)
+	effect.global_position = global_position
+	queue_free()
+	if hero:
+		hero.kills += 1

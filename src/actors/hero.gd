@@ -8,9 +8,11 @@ signal die()
 @export var gun: Gun = null
 @export var happy_boo: Node2D = null
 @export var movement_speed: float = 600
+@export var health: float = 100
+
+var kills: int = 0
 var idle_firerate: float = 0.05
 var moving_firerate: float = 0.2
-var health: float = 100
 
 func _physics_process(delta: float) -> void:
 	# do nothing if dead
