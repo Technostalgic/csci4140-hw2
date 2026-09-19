@@ -7,9 +7,9 @@
 
 [node name="Gun" type="Node2D" unique_id=1969995768 node_paths=PackedStringArray("projectile_spawnpoint", "fire_timer")]
 script = ExtResource("1_y6f8d")
-projectile_spawnpoint = NodePath("WeaponAnchor/Pistol/ProjectileSpawnpoint")
 projectile = ExtResource("2_1f25g")
 muzzle_flash = ExtResource("3_d62ca")
+projectile_spawnpoint = NodePath("WeaponAnchor/Pistol/ProjectileSpawnpoint")
 fire_timer = NodePath("FireTimer")
 fire_rate = 0.1
 metadata/_custom_type_script = "uid://dbfrov76ix7eg"

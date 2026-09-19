@@ -1,12 +1,14 @@
 [gd_scene format=3 uid="uid://cwyjwkmbi18nf"]
 
-[ext_resource type="Script" uid="uid://dqrvq1m0j3d0d" path="res://src/weapon/gun.gd" id="1_qarfq"]
+[ext_resource type="Script" uid="uid://pyxu55nhookm" path="res://src/weapon/shotgun.gd" id="1_36h01"]
 [ext_resource type="Texture2D" uid="uid://coon1w77o334i" path="res://content/gfx/pistol.png" id="4_owrpd"]
 
-[node name="Shotgun" type="Node2D" unique_id=1448111750 node_paths=PackedStringArray("fire_timer")]
-script = ExtResource("1_qarfq")
+[node name="Shotgun" type="Node2D" unique_id=1703651934 node_paths=PackedStringArray("projectile_spawnpoint", "fire_timer")]
+script = ExtResource("1_36h01")
+projectile_spawnpoint = NodePath("WeaponAnchor/ShotgunGraphic/ProjectileSpawnpoint")
 fire_timer = NodePath("FireTimer")
-metadata/_custom_type_script = "uid://dqrvq1m0j3d0d"
+fire_rate = 0.05
+metadata/_custom_type_script = "uid://pyxu55nhookm"
 
 [node name="FireTimer" type="Timer" parent="." unique_id=466582412]
 wait_time = 0.3
@@ -15,9 +17,9 @@ autostart = true
 [node name="WeaponAnchor" type="Marker2D" parent="." unique_id=471340787]
 position = Vector2(38, 5)
 
-[node name="Pistol" type="Sprite2D" parent="WeaponAnchor" unique_id=1924386464]
+[node name="ShotgunGraphic" type="Sprite2D" parent="WeaponAnchor" unique_id=1924386464]
 position = Vector2(18, -6)
 texture = ExtResource("4_owrpd")
 
-[node name="ProjectileSpawnpoint" type="Marker2D" parent="WeaponAnchor/Pistol" unique_id=1161980563]
+[node name="ProjectileSpawnpoint" type="Marker2D" parent="WeaponAnchor/ShotgunGraphic" unique_id=1161980563]
 position = Vector2(20, -10)

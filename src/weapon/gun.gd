@@ -1,6 +1,7 @@
 class_name Gun
 extends Node2D
 
+@export var projectile_spawnpoint: Marker2D = null
 @export var fire_timer: Timer = null
 @export var active: bool = true
 @export var fire_rate: float = 0.3
@@ -17,6 +18,7 @@ func _process(delta: float) -> void:
 	if Input.is_action_pressed("Shoot"):
 		if ready_to_fire:
 			fire()
+			ready_to_fire = false
 		if fire_timer.is_stopped():
 			fire_timer.start(fire_rate)
 	

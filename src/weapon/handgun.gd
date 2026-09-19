@@ -1,7 +1,6 @@
 class_name Handgun
 extends Gun
 
-@export var projectile_spawnpoint: Marker2D = null
 @export var projectile: PackedScene = null
 @export var muzzle_flash: PackedScene = null
 
