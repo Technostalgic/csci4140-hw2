@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 signal die()
 
+@export var death_sound: AudioStream = null
 @export var camera: Camera2D = null
 @export var hurtbox: Area2D = null
 @export var health_bar: ProgressBar = null
@@ -62,6 +63,13 @@ func kill() -> void:
 	# emit death signal on die and remove hero
 	die.emit()
 	queue_free()
+	
+	# play hero death sound
+	var audio := AudioStreamPlayer.new()
+	audio.stream = death_sound
+	audio.finished.connect(audio.queue_free) # remove audio node when sound effect is done playing
+	get_tree().root.add_child(audio)
+	audio.play()
 
 func handle_animation():
 	# walk animation if moving

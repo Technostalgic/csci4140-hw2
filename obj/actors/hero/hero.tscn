@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b77tfnmyicptp" path="res://src/actors/hero.gd" id="1_0cirb"]
 [ext_resource type="PackedScene" uid="uid://pbmyh1qru7p" path="res://obj/actors/hero/happy_boo_graphic.tscn" id="1_780bu"]
+[ext_resource type="AudioStream" uid="uid://dsnsfw3ykcnpn" path="res://content/sfx/test.wav" id="2_bdwod"]
 [ext_resource type="Texture2D" uid="uid://dk5b8a84a6n2h" path="res://content/gfx/ground_shadow.png" id="3_hsbtt"]
 [ext_resource type="PackedScene" uid="uid://dl8tiw1bpd1nt" path="res://obj/weapon/gun.tscn" id="3_t4k1q"]
 
@@ -21,6 +22,7 @@ corner_radius_bottom_left = 5
 [node name="Hero" type="CharacterBody2D" unique_id=1506529082 node_paths=PackedStringArray("hurtbox", "health_bar", "gun", "happy_boo")]
 collision_mask = 3
 script = ExtResource("1_0cirb")
+death_sound = ExtResource("2_bdwod")
 hurtbox = NodePath("Hurtbox")
 health_bar = NodePath("Healthbar")
 gun = NodePath("Gun")
@@ -48,7 +50,6 @@ shape = SubResource("CircleShape2D_o3jbo")
 
 [node name="Gun" parent="." unique_id=628232303 instance=ExtResource("3_t4k1q")]
 position = Vector2(0, -42)
-collision_mask = 3
 
 [node name="Healthbar" type="ProgressBar" parent="." unique_id=249806137]
 anchors_preset = -1
