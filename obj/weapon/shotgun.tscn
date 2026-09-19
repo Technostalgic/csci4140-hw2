@@ -5,6 +5,7 @@
 
 [node name="Shotgun" type="Node2D" unique_id=1448111750]
 script = ExtResource("1_qarfq")
+active = null
 metadata/_custom_type_script = "uid://dqrvq1m0j3d0d"
 
 [node name="FireTimer" type="Timer" parent="." unique_id=466582412]
