@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://dqrvq1m0j3d0d" path="res://src/weapon/gun.gd" id="1_qarfq"]
 [ext_resource type="Texture2D" uid="uid://coon1w77o334i" path="res://content/gfx/pistol.png" id="4_owrpd"]
 
-[node name="Shotgun" type="Node2D" unique_id=1448111750]
+[node name="Shotgun" type="Node2D" unique_id=1448111750 node_paths=PackedStringArray("fire_timer")]
 script = ExtResource("1_qarfq")
-active = null
+fire_timer = NodePath("FireTimer")
 metadata/_custom_type_script = "uid://dqrvq1m0j3d0d"
 
 [node name="FireTimer" type="Timer" parent="." unique_id=466582412]

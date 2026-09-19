@@ -1,16 +1,17 @@
 [gd_scene format=3 uid="uid://dl8tiw1bpd1nt"]
 
-[ext_resource type="Script" uid="uid://dbfrov76ix7eg" path="res://src/weapon/handgun.gd" id="1_iqy54"]
-[ext_resource type="Texture2D" uid="uid://coon1w77o334i" path="res://content/gfx/pistol.png" id="1_kmld4"]
-[ext_resource type="PackedScene" uid="uid://bmo0auqbfad2o" path="res://obj/weapon/bullet.tscn" id="2_donny"]
-[ext_resource type="PackedScene" uid="uid://c1b2kbuq1if08" path="res://obj/effects/muzzle_flash.tscn" id="3_enm2i"]
+[ext_resource type="Script" uid="uid://dbfrov76ix7eg" path="res://src/weapon/handgun.gd" id="1_y6f8d"]
+[ext_resource type="PackedScene" uid="uid://bmo0auqbfad2o" path="res://obj/weapon/bullet.tscn" id="2_1f25g"]
+[ext_resource type="PackedScene" uid="uid://c1b2kbuq1if08" path="res://obj/effects/muzzle_flash.tscn" id="3_d62ca"]
+[ext_resource type="Texture2D" uid="uid://coon1w77o334i" path="res://content/gfx/pistol.png" id="4_ba1lw"]
 
 [node name="Gun" type="Node2D" unique_id=1969995768 node_paths=PackedStringArray("projectile_spawnpoint", "fire_timer")]
-script = ExtResource("1_iqy54")
+script = ExtResource("1_y6f8d")
 projectile_spawnpoint = NodePath("WeaponAnchor/Pistol/ProjectileSpawnpoint")
-projectile = ExtResource("2_donny")
-muzzle_flash = ExtResource("3_enm2i")
+projectile = ExtResource("2_1f25g")
+muzzle_flash = ExtResource("3_d62ca")
 fire_timer = NodePath("FireTimer")
+fire_rate = 0.1
 metadata/_custom_type_script = "uid://dbfrov76ix7eg"
 
 [node name="FireTimer" type="Timer" parent="." unique_id=466582412]
@@ -22,7 +23,7 @@ position = Vector2(38, 5)
 
 [node name="Pistol" type="Sprite2D" parent="WeaponAnchor" unique_id=1924386464]
 position = Vector2(18, -6)
-texture = ExtResource("1_kmld4")
+texture = ExtResource("4_ba1lw")
 
 [node name="ProjectileSpawnpoint" type="Marker2D" parent="WeaponAnchor/Pistol" unique_id=1161980563]
 position = Vector2(20, -10)

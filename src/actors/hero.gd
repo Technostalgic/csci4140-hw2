@@ -13,8 +13,6 @@ signal die()
 @export var health: float = 100
 
 var kills: int = 0
-var idle_firerate: float = 0.05
-var moving_firerate: float = 0.2
 
 func _physics_process(delta: float) -> void:
 	# do nothing if dead
@@ -32,12 +30,6 @@ func _physics_process(delta: float) -> void:
 	velocity = movement * movement_speed
 	move_and_slide()
 	handle_animation()
-	
-	# handle firerate changing
-	if velocity.length_squared() > 1:
-		gun.fire_rate = moving_firerate
-	else: 
-		gun.fire_rate = idle_firerate
 	
 	# handle damage from mobs
 	var bodies = hurtbox.get_overlapping_bodies()
