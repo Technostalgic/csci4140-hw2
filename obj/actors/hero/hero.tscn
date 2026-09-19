@@ -20,7 +20,6 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
 [node name="Hero" type="CharacterBody2D" unique_id=1506529082 node_paths=PackedStringArray("hurtbox", "health_bar", "gun", "happy_boo")]
-collision_mask = 3
 script = ExtResource("1_0cirb")
 death_sound = ExtResource("2_bdwod")
 hurtbox = NodePath("Hurtbox")
