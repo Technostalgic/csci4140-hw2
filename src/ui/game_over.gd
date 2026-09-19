@@ -7,6 +7,7 @@ extends Control
 @export var popup_delay: float = 1
 @export var animation_time: float = 0.5
 
+var _sound_played: bool = false
 var game_scene: PackedScene = null
 var anim_delta: float = 0
 
@@ -15,22 +16,16 @@ func _ready() -> void:
 	hide()
 
 func _process(delta: float) -> void:
-	_handle_animation(delta)
+	if visible:
+		_handle_animation(delta)
 
 func open() -> void:
 	
 	# update kills text
 	kills_value_text.text = str(Game.instance.hero.kills)
 	
-	# stop the music and play the sound effect
-	music.stop()
-	var audio := AudioStreamPlayer.new()
-	audio.stream = sound_effect
-	audio.finished.connect(audio.queue_free) # remove audio node when sound effect is done playing
-	get_tree().root.add_child(audio)
-	audio.play()
-	
 	# reset animation
+	_sound_played = false
 	offset_transform_enabled = true
 	anim_delta = -popup_delay
 	modulate.a = 0
@@ -57,6 +52,17 @@ func _handle_animation(delta: float) -> void:
 	anim_delta += delta
 	if anim_delta < 0:
 		return
+	
+	# stop the music and play the sound effect
+	if not _sound_played:
+		music.stop()
+		var audio := AudioStreamPlayer.new()
+		audio.stream = sound_effect
+		audio.finished.connect(audio.queue_free) # remove audio node when sound effect is done playing
+		get_tree().root.add_child(audio)
+		audio.play()
+		_sound_played = true
+	
 	if anim_delta >= animation_time:
 		anim_delta = animation_time
 		offset_transform_enabled = false
