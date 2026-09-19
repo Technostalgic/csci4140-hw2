@@ -19,7 +19,7 @@ y_sort_enabled = true
 script = ExtResource("1_pglxl")
 gameover_screen = NodePath("UiCanvas")
 hero = NodePath("Hero")
-slime_spawner = NodePath("Hero/Camera2D/SpawnPath/PathSpawner")
+slime_spawner = NodePath("Camera2D/SpawnPath/PathSpawner")
 slime_scene = ExtResource("2_4v0g2")
 
 [node name="UiCanvas" type="CanvasLayer" parent="." unique_id=1203432412]
@@ -118,16 +118,18 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.5069161, 0.57526225, 0.63503057, 1)
 
-[node name="Hero" parent="." unique_id=1506529082 instance=ExtResource("3_08rg1")]
+[node name="Hero" parent="." unique_id=1506529082 node_paths=PackedStringArray("camera") instance=ExtResource("3_08rg1")]
+position = Vector2(929, 492)
+camera = NodePath("../Camera2D")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1658956134]
 position = Vector2(929, 492)
 
-[node name="Camera2D" type="Camera2D" parent="Hero" unique_id=1658956134]
-
-[node name="SpawnPath" type="Path2D" parent="Hero/Camera2D" unique_id=1335888819]
+[node name="SpawnPath" type="Path2D" parent="Camera2D" unique_id=1335888819]
 position = Vector2(-929, -492)
 curve = SubResource("Curve2D_u44n3")
 
-[node name="PathSpawner" type="PathFollow2D" parent="Hero/Camera2D/SpawnPath" unique_id=1370164637]
+[node name="PathSpawner" type="PathFollow2D" parent="Camera2D/SpawnPath" unique_id=1370164637]
 position = Vector2(-135, -160)
 rotates = false
 cubic_interp = false

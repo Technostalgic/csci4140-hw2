@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 signal die()
 
+@export var camera: Camera2D = null
 @export var hurtbox: Area2D = null
 @export var health_bar: ProgressBar = null
 @export var gun: Gun = null
@@ -43,12 +44,24 @@ func _physics_process(delta: float) -> void:
 		if body is Mob:
 			health -= 5 * delta
 	
-	# emit death signal on die
 	if health <= 0:
-		die.emit()
+		kill()
 	
 	# display health in progress bar
 	health_bar.value = health
+
+func _process(delta: float) -> void:
+	_handle_camera_follow(delta)
+
+func _handle_camera_follow(_delta: float) -> void:
+	if not camera: return
+	camera.global_position = global_position
+
+func kill() -> void:
+	
+	# emit death signal on die and remove hero
+	die.emit()
+	queue_free()
 
 func handle_animation():
 	# walk animation if moving
