@@ -7,6 +7,7 @@ var fire_rate: float = 0.3
 @export var fire_timer: Timer = null
 @export var projectile: PackedScene = null
 @export var muzzle_flash: PackedScene = null
+@export var active: bool = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -14,6 +15,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
+	if not active: return
 	
 	# handle whether or not the gun should be firing
 	if Input.is_action_pressed("Shoot"):

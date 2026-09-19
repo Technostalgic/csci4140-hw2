@@ -16,7 +16,9 @@ var moving_firerate: float = 0.2
 
 func _physics_process(delta: float) -> void:
 	# do nothing if dead
-	if health <= 0: return
+	if health <= 0: 
+		gun.active = false
+		return
 	
 	# handle input and movement
 	var movement = Input.get_vector(
