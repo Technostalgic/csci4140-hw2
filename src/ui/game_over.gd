@@ -4,6 +4,9 @@ extends ColorRect
 @export var hero: Hero = null
 @export var sound_effect: AudioStream = null
 @export var music: AudioStreamPlayer = null
+@export var animation_time: float = 0.5
+
+var anim_delta: float = 0
 
 func _ready() -> void:
 	hero.die.connect(open)
@@ -18,6 +21,9 @@ func open() -> void:
 	audio.finished.connect(audio.queue_free) # remove audio node when sound effect is done playing
 	get_tree().root.add_child(audio)
 	audio.play()
+	
+	# reset animation time
+	anim_delta = 0
 	
 	# show the game over ui screen
 	show()
