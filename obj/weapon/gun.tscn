@@ -1,17 +1,17 @@
 [gd_scene format=3 uid="uid://dl8tiw1bpd1nt"]
 
-[ext_resource type="Script" uid="uid://dqrvq1m0j3d0d" path="res://src/weapon/gun.gd" id="1_b7uwb"]
+[ext_resource type="Script" uid="uid://dbfrov76ix7eg" path="res://src/weapon/handgun.gd" id="1_iqy54"]
 [ext_resource type="Texture2D" uid="uid://coon1w77o334i" path="res://content/gfx/pistol.png" id="1_kmld4"]
 [ext_resource type="PackedScene" uid="uid://bmo0auqbfad2o" path="res://obj/weapon/bullet.tscn" id="2_donny"]
 [ext_resource type="PackedScene" uid="uid://c1b2kbuq1if08" path="res://obj/effects/muzzle_flash.tscn" id="3_enm2i"]
 
-[node name="Gun" type="Node2D" unique_id=1448111750 node_paths=PackedStringArray("projectile_spawnpoint", "fire_timer")]
-script = ExtResource("1_b7uwb")
+[node name="Gun" type="Node2D" unique_id=1969995768 node_paths=PackedStringArray("projectile_spawnpoint", "fire_timer")]
+script = ExtResource("1_iqy54")
 projectile_spawnpoint = NodePath("WeaponAnchor/Pistol/ProjectileSpawnpoint")
 fire_timer = NodePath("FireTimer")
 projectile = ExtResource("2_donny")
 muzzle_flash = ExtResource("3_enm2i")
-metadata/_custom_type_script = "uid://dqrvq1m0j3d0d"
+metadata/_custom_type_script = "uid://dbfrov76ix7eg"
 
 [node name="FireTimer" type="Timer" parent="." unique_id=466582412]
 wait_time = 0.3
