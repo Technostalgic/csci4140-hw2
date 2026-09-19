@@ -2,7 +2,9 @@
 
 [ext_resource type="Script" uid="uid://chm5wgj0vr7r" path="res://src/game.gd" id="1_pglxl"]
 [ext_resource type="PackedScene" uid="uid://m08413nlk87o" path="res://obj/actors/slime/mob.tscn" id="2_4v0g2"]
+[ext_resource type="Script" uid="uid://dytnyrea2rm7c" path="res://src/ui/game_over.gd" id="3_4v0g2"]
 [ext_resource type="PackedScene" uid="uid://dt4xwrmw805uf" path="res://obj/actors/hero/hero.tscn" id="3_08rg1"]
+[ext_resource type="AudioStream" uid="uid://dsnsfw3ykcnpn" path="res://content/sfx/test.wav" id="4_08rg1"]
 [ext_resource type="PackedScene" uid="uid://cjfdkan3x1u0o" path="res://obj/props/tree.tscn" id="4_psfqy"]
 [ext_resource type="AudioStream" uid="uid://g5j5576qqned" path="res://content/sfx/AiHolocaust.wav" id="5_1nq40"]
 
@@ -15,23 +17,27 @@ point_count = 5
 [node name="Game" type="Node2D" unique_id=801271642 node_paths=PackedStringArray("gameover_screen", "hero", "slime_spawner")]
 y_sort_enabled = true
 script = ExtResource("1_pglxl")
-gameover_screen = NodePath("GameOverCanvas")
+gameover_screen = NodePath("UiCanvas")
 hero = NodePath("Hero")
 slime_spawner = NodePath("Hero/Camera2D/SpawnPath/PathSpawner")
 slime_scene = ExtResource("2_4v0g2")
 
-[node name="GameOverCanvas" type="CanvasLayer" parent="." unique_id=1203432412]
-visible = false
+[node name="UiCanvas" type="CanvasLayer" parent="." unique_id=1203432412]
 
-[node name="Background" type="ColorRect" parent="GameOverCanvas" unique_id=2130205648]
+[node name="GameOver" type="ColorRect" parent="UiCanvas" unique_id=2130205648 node_paths=PackedStringArray("hero", "music")]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.40784314)
+script = ExtResource("3_4v0g2")
+hero = NodePath("../../Hero")
+sound_effect = ExtResource("4_08rg1")
+music = NodePath("../../Music")
 
-[node name="GameOverText" type="Label" parent="GameOverCanvas/Background" unique_id=1453005495]
+[node name="GameOverText" type="Label" parent="UiCanvas/GameOver" unique_id=1453005495]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -105,5 +111,4 @@ position = Vector2(1467, 869)
 stream = ExtResource("5_1nq40")
 autoplay = true
 
-[connection signal="die" from="Hero" to="." method="_on_hero_die"]
 [connection signal="timeout" from="SpawnTimer" to="." method="spawn_mob"]
