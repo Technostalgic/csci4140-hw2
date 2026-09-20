@@ -8,6 +8,7 @@ static var instance: Game = null
 @export var slime_spawner: PathFollow2D = null
 @export var slime_scene: PackedScene = null
 @export var gibs: GibEffects = null
+@export var blood_puddles: EffectSpawner = null
 
 func _init() -> void:
 	Game.instance = self

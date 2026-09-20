@@ -9,6 +9,9 @@
 [ext_resource type="AudioStream" uid="uid://dsnsfw3ykcnpn" path="res://content/sfx/test.wav" id="4_08rg1"]
 [ext_resource type="PackedScene" uid="uid://cjfdkan3x1u0o" path="res://obj/props/tree.tscn" id="4_psfqy"]
 [ext_resource type="AudioStream" uid="uid://g5j5576qqned" path="res://content/sfx/AiHolocaust.wav" id="5_1nq40"]
+[ext_resource type="Script" uid="uid://cxlpqv7vp5yq0" path="res://src/effects/effect_spawner.gd" id="5_gmrog"]
+[ext_resource type="Texture2D" uid="uid://dk5b8a84a6n2h" path="res://content/gfx/ground_shadow.png" id="6_77nmb"]
+[ext_resource type="Script" uid="uid://5fmm6wlhmjkl" path="res://src/effects/fade_visual.gd" id="6_s1hb5"]
 
 [sub_resource type="Curve2D" id="Curve2D_u44n3"]
 _data = {
@@ -16,7 +19,7 @@ _data = {
 }
 point_count = 5
 
-[node name="Game" type="Node2D" unique_id=1688597872 node_paths=PackedStringArray("gameover_screen", "hero", "slime_spawner", "gibs")]
+[node name="Game" type="Node2D" unique_id=1688597872 node_paths=PackedStringArray("gameover_screen", "hero", "slime_spawner", "gibs", "blood_puddles")]
 y_sort_enabled = true
 script = ExtResource("1_pglxl")
 gameover_screen = NodePath("UiCanvas")
@@ -24,6 +27,7 @@ hero = NodePath("Hero")
 slime_spawner = NodePath("Camera2D/SpawnPath/PathSpawner")
 slime_scene = ExtResource("2_4v0g2")
 gibs = NodePath("Gibs")
+blood_puddles = NodePath("BloodPuddles")
 metadata/_custom_type_script = "uid://chm5wgj0vr7r"
 
 [node name="UiCanvas" type="CanvasLayer" parent="." unique_id=1203432412]
@@ -122,6 +126,24 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.5069161, 0.57526225, 0.63503057, 1)
 
+[node name="BloodPuddles" type="Node2D" parent="." unique_id=768244834 node_paths=PackedStringArray("effect_base")]
+z_index = -1
+script = ExtResource("5_gmrog")
+effect_base = NodePath("BloodPuddle")
+angle_randomization = 0.0
+pool_size = 100
+metadata/_custom_type_script = "uid://cxlpqv7vp5yq0"
+
+[node name="BloodPuddle" type="Sprite2D" parent="BloodPuddles" unique_id=1337570083]
+modulate = Color(0.46666667, 0, 0, 1)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("6_77nmb")
+
+[node name="FadeVisual" type="Node" parent="BloodPuddles/BloodPuddle" unique_id=1825953653 node_paths=PackedStringArray("target_graphic")]
+script = ExtResource("6_s1hb5")
+target_graphic = NodePath("..")
+metadata/_custom_type_script = "uid://5fmm6wlhmjkl"
+
 [node name="Gibs" type="Node2D" parent="." unique_id=668064269 node_paths=PackedStringArray("effect_base", "container_node")]
 y_sort_enabled = true
 script = ExtResource("3_psfqy")
@@ -182,5 +204,6 @@ stream = ExtResource("5_1nq40")
 autoplay = true
 
 [connection signal="pressed" from="UiCanvas/Container/GameOver/RetryButton" to="UiCanvas/Container/GameOver" method="_retry_level"]
+[connection signal="fade_complete" from="BloodPuddles/BloodPuddle/FadeVisual" to="BloodPuddles" method="_on_effect_complete"]
 [connection signal="life_expired" from="Gibs/Gib" to="Gibs" method="_on_gib_expire"]
 [connection signal="timeout" from="SpawnTimer" to="." method="spawn_mob"]

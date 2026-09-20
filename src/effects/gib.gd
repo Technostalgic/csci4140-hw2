@@ -7,7 +7,7 @@ signal life_expired(gib: Gib)
 @export var shadow: Node2D = null
 @export var radius: float = 10
 @export var acceleration: Vector3 = Vector3.FORWARD * 1500
-@export var bounciness: float = 0.2
+@export var bounciness: float = 0.5
 @export var friction: float = 0.9
 @export var ground_life: float = 0.25
 
@@ -39,6 +39,8 @@ func _physics_process(delta: float) -> void:
 		velocity.x *= friction
 		velocity.y *= friction
 		rotational_vel *= friction
+		if velocity.z > 10:
+			Game.instance.blood_puddles.spawn_effect(global_position, 0)
 	
 	shadow.position.y = air_height
 
