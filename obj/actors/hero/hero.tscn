@@ -19,12 +19,13 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[node name="Hero" type="CharacterBody2D" unique_id=1506529082 node_paths=PackedStringArray("hurtbox", "health_bar", "happy_boo")]
+[node name="Hero" type="CharacterBody2D" unique_id=319609223 node_paths=PackedStringArray("hurtbox", "health_bar", "happy_boo")]
 script = ExtResource("1_0cirb")
 death_sound = ExtResource("2_bdwod")
 hurtbox = NodePath("Hurtbox")
 health_bar = NodePath("Healthbar")
 happy_boo = NodePath("HappyBoo")
+metadata/_custom_type_script = "uid://b77tfnmyicptp"
 
 [node name="HappyBoo" parent="." unique_id=1091727253 instance=ExtResource("1_780bu")]
 

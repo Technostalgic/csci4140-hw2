@@ -4,6 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://m08413nlk87o" path="res://obj/actors/slime/mob.tscn" id="2_4v0g2"]
 [ext_resource type="Script" uid="uid://dytnyrea2rm7c" path="res://src/ui/game_over.gd" id="3_4v0g2"]
 [ext_resource type="PackedScene" uid="uid://dt4xwrmw805uf" path="res://obj/actors/hero/hero.tscn" id="3_08rg1"]
+[ext_resource type="Script" uid="uid://sddcy6p5b3je" path="res://src/effects/gib_effects.gd" id="3_psfqy"]
+[ext_resource type="PackedScene" uid="uid://bqphum5xcynl1" path="res://obj/effects/gib.tscn" id="4_1nq40"]
 [ext_resource type="AudioStream" uid="uid://dsnsfw3ykcnpn" path="res://content/sfx/test.wav" id="4_08rg1"]
 [ext_resource type="PackedScene" uid="uid://cjfdkan3x1u0o" path="res://obj/props/tree.tscn" id="4_psfqy"]
 [ext_resource type="AudioStream" uid="uid://g5j5576qqned" path="res://content/sfx/AiHolocaust.wav" id="5_1nq40"]
@@ -14,13 +16,15 @@ _data = {
 }
 point_count = 5
 
-[node name="Game" type="Node2D" unique_id=801271642 node_paths=PackedStringArray("gameover_screen", "hero", "slime_spawner")]
+[node name="Game" type="Node2D" unique_id=1688597872 node_paths=PackedStringArray("gameover_screen", "hero", "slime_spawner", "gibs")]
 y_sort_enabled = true
 script = ExtResource("1_pglxl")
 gameover_screen = NodePath("UiCanvas")
 hero = NodePath("Hero")
 slime_spawner = NodePath("Camera2D/SpawnPath/PathSpawner")
 slime_scene = ExtResource("2_4v0g2")
+gibs = NodePath("Gibs")
+metadata/_custom_type_script = "uid://chm5wgj0vr7r"
 
 [node name="UiCanvas" type="CanvasLayer" parent="." unique_id=1203432412]
 
@@ -118,6 +122,16 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.5069161, 0.57526225, 0.63503057, 1)
 
+[node name="Gibs" type="Node2D" parent="." unique_id=668064269 node_paths=PackedStringArray("effect_base", "container_node")]
+y_sort_enabled = true
+script = ExtResource("3_psfqy")
+effect_base = NodePath("Gib")
+pool_size = 50
+container_node = NodePath("..")
+metadata/_custom_type_script = "uid://sddcy6p5b3je"
+
+[node name="Gib" parent="Gibs" unique_id=438570077 instance=ExtResource("4_1nq40")]
+
 [node name="Hero" parent="." unique_id=1506529082 node_paths=PackedStringArray("camera") instance=ExtResource("3_08rg1")]
 position = Vector2(929, 492)
 camera = NodePath("../Camera2D")
@@ -168,4 +182,5 @@ stream = ExtResource("5_1nq40")
 autoplay = true
 
 [connection signal="pressed" from="UiCanvas/Container/GameOver/RetryButton" to="UiCanvas/Container/GameOver" method="_retry_level"]
+[connection signal="life_expired" from="Gibs/Gib" to="Gibs" method="_on_gib_expire"]
 [connection signal="timeout" from="SpawnTimer" to="." method="spawn_mob"]

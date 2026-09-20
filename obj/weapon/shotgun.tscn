@@ -58,14 +58,14 @@ hit_from_inside = true
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=934029038]
 stream = ExtResource("4_qarfq")
 
-[node name="ProjectileHitEffects" type="Node" parent="." unique_id=1401472394 node_paths=PackedStringArray("effect_base")]
+[node name="ProjectileHitEffects" type="Node2D" parent="." unique_id=1309495653 node_paths=PackedStringArray("effect_base")]
 script = ExtResource("7_owrpd")
-effect_base = NodePath("SpriteAnimator")
+effect_base = NodePath("HitSparks")
 randomize_h_flip = true
 angle_randomization = 0.0
 metadata/_custom_type_script = "uid://cxlpqv7vp5yq0"
 
-[node name="SpriteAnimator" type="Sprite2D" parent="ProjectileHitEffects" unique_id=2108656231]
+[node name="HitSparks" type="Sprite2D" parent="ProjectileHitEffects" unique_id=2108656231]
 visible = false
 z_index = 10
 texture_filter = 1
@@ -81,4 +81,4 @@ max_frame = 8
 autoplay = true
 metadata/_custom_type_script = "uid://dahw6ijlago88"
 
-[connection signal="animation_finished" from="ProjectileHitEffects/SpriteAnimator" to="ProjectileHitEffects" method="_on_effect_complete"]
+[connection signal="animation_finished" from="ProjectileHitEffects/HitSparks" to="ProjectileHitEffects" method="_on_effect_complete"]

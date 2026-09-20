@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://bqphum5xcynl1"]
+
+[ext_resource type="Script" uid="uid://bjmmx7p55ekty" path="res://src/effects/gib.gd" id="1_qxmd0"]
+[ext_resource type="Texture2D" uid="uid://b3e4kkrfbvr1g" path="res://content/gfx/hero/square_foot.png" id="2_rwf8g"]
+
+[node name="Gib" type="Node2D" unique_id=438570077 node_paths=PackedStringArray("graphic", "shadow")]
+script = ExtResource("1_qxmd0")
+graphic = NodePath("Gfx")
+shadow = NodePath("Shadow")
+metadata/_custom_type_script = "uid://bjmmx7p55ekty"
+
+[node name="Gfx" type="Node2D" parent="." unique_id=17173877]
+
+[node name="Fill" type="Polygon2D" parent="Gfx" unique_id=1279222863]
+position = Vector2(-1, -19)
+color = Color(1, 0, 0, 1)
+polygon = PackedVector2Array(2, 0, 17, -1, 24, 10, 18, 27, -3, 35, -7, 33, -12, 22, -18, 18, -19, 12, -13, 7, 0, 8)
+
+[node name="Stroke" type="Line2D" parent="Gfx" unique_id=1795466939]
+position = Vector2(-1, -19)
+points = PackedVector2Array(2, 0, 17, -1, 24, 10, 18, 27, -3, 35, -7, 33, -12, 22, -18, 18, -19, 12, -13, 7, 0, 8)
+closed = true
+width = 4.0
+default_color = Color(0.2509804, 0, 0, 1)
+
+[node name="Shadow" type="Sprite2D" parent="." unique_id=1537627058]
+modulate = Color(0, 0, 0, 0.2509804)
+show_behind_parent = true
+texture = ExtResource("2_rwf8g")
