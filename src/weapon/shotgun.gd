@@ -2,10 +2,10 @@ class_name Shotgun
 extends Gun
 
 @export var shoot_sound: AudioStream = null
-@export var impact_effect: PackedScene = null
 @export var audio_player: AudioStreamPlayer = null
 @export var raycast: RayCast2D = null
 @export var muzzle_flash: SpriteAnimator = null
+@export var impact_effects: EffectSpawner = null
 @export var bullets_per_shot: int = 6
 @export var spread: float = PI / 8
 @export_range(0, 1) var evenly_spread_factor: float = 0.8
@@ -77,9 +77,7 @@ func _fire_shot(direction: float):
 		trail_length = hit_point.distance_to(raycast.global_position)
 		
 		# create impact effect
-		var impact := impact_effect.instantiate() as Node2D
-		get_tree().root.add_child(impact)
-		impact.global_position = hit_point
+		impact_effects.spawn_effect(hit_point, raycast.get_collision_normal().angle() + PI * 0.5)
 	
 	# create bullet trail
 	var trail = get_trail()

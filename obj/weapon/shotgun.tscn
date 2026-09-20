@@ -1,19 +1,21 @@
 [gd_scene format=3 uid="uid://cwyjwkmbi18nf"]
 
 [ext_resource type="Script" uid="uid://pyxu55nhookm" path="res://src/weapon/shotgun.gd" id="1_36h01"]
-[ext_resource type="PackedScene" uid="uid://kcl4efkvrany" path="res://obj/effects/impact.tscn" id="2_41mpv"]
 [ext_resource type="Texture2D" uid="uid://coon1w77o334i" path="res://content/gfx/pistol.png" id="4_owrpd"]
 [ext_resource type="AudioStream" uid="uid://dsnsfw3ykcnpn" path="res://content/sfx/test.wav" id="4_qarfq"]
 [ext_resource type="Texture2D" uid="uid://hd1526c0aud8" path="res://content/gfx/shotgun_blast.png" id="5_sflqf"]
-[ext_resource type="Script" uid="uid://dahw6ijlago88" path="res://src/sprite_animator.gd" id="6_kocch"]
+[ext_resource type="Script" uid="uid://dahw6ijlago88" path="res://src/effects/sprite_animator.gd" id="6_kocch"]
+[ext_resource type="Script" uid="uid://cxlpqv7vp5yq0" path="res://src/effects/effect_spawner.gd" id="7_owrpd"]
+[ext_resource type="Texture2D" uid="uid://bg4ubxv7rj0vm" path="res://content/gfx/projectile_sparks.png" id="8_m6nev"]
 
-[node name="Shotgun" type="Node2D" unique_id=1703651934 node_paths=PackedStringArray("audio_player", "raycast", "muzzle_flash", "projectile_spawnpoint", "fire_timer")]
+[node name="Shotgun" type="Node2D" unique_id=1703651934 node_paths=PackedStringArray("audio_player", "raycast", "muzzle_flash", "impact_effects", "projectile_spawnpoint", "fire_timer")]
+texture_filter = 1
 script = ExtResource("1_36h01")
 shoot_sound = ExtResource("4_qarfq")
-impact_effect = ExtResource("2_41mpv")
 audio_player = NodePath("AudioStreamPlayer")
 raycast = NodePath("Raycast")
 muzzle_flash = NodePath("MuzzleFlash")
+impact_effects = NodePath("ProjectileHitEffects")
 damage = 0.5
 projectile_spawnpoint = NodePath("WeaponAnchor/ShotgunGraphic/ProjectileSpawnpoint")
 fire_timer = NodePath("FireTimer")
@@ -44,6 +46,7 @@ stream = ExtResource("4_qarfq")
 [node name="MuzzleFlash" type="Sprite2D" parent="." unique_id=1478118810]
 position = Vector2(80, -12)
 rotation = 0.7853982
+scale = Vector2(2, 2)
 texture = ExtResource("5_sflqf")
 offset = Vector2(25, -25)
 hframes = 10
@@ -52,3 +55,27 @@ script = ExtResource("6_kocch")
 min_frame = 40
 max_frame = 49
 metadata/_custom_type_script = "uid://dahw6ijlago88"
+
+[node name="ProjectileHitEffects" type="Node" parent="." unique_id=1401472394 node_paths=PackedStringArray("effect_base")]
+script = ExtResource("7_owrpd")
+effect_base = NodePath("SpriteAnimator")
+randomize_h_flip = true
+angle_randomization = 0.0
+metadata/_custom_type_script = "uid://cxlpqv7vp5yq0"
+
+[node name="SpriteAnimator" type="Sprite2D" parent="ProjectileHitEffects" unique_id=2108656231]
+visible = false
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("8_m6nev")
+offset = Vector2(0, -10)
+hframes = 9
+vframes = 9
+frame = 3
+script = ExtResource("6_kocch")
+min_frame = 3
+max_frame = 8
+autoplay = true
+metadata/_custom_type_script = "uid://dahw6ijlago88"
+
+[connection signal="animation_finished" from="ProjectileHitEffects/SpriteAnimator" to="ProjectileHitEffects" method="_on_effect_complete"]
