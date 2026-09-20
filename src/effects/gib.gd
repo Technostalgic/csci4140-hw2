@@ -39,7 +39,7 @@ func _physics_process(delta: float) -> void:
 		velocity.x *= friction
 		velocity.y *= friction
 		rotational_vel *= friction
-		if velocity.z > 10:
+		if velocity.z > 10 or Vector2(velocity.x, velocity.y).length_squared() > 100000:
 			Game.instance.blood_puddles.spawn_effect(global_position, 0)
 	
 	shadow.position.y = air_height
