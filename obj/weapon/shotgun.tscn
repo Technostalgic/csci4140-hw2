@@ -4,13 +4,16 @@
 [ext_resource type="PackedScene" uid="uid://kcl4efkvrany" path="res://obj/effects/impact.tscn" id="2_41mpv"]
 [ext_resource type="Texture2D" uid="uid://coon1w77o334i" path="res://content/gfx/pistol.png" id="4_owrpd"]
 [ext_resource type="AudioStream" uid="uid://dsnsfw3ykcnpn" path="res://content/sfx/test.wav" id="4_qarfq"]
+[ext_resource type="Texture2D" uid="uid://hd1526c0aud8" path="res://content/gfx/shotgun_blast.png" id="5_sflqf"]
+[ext_resource type="Script" uid="uid://dahw6ijlago88" path="res://src/sprite_animator.gd" id="6_kocch"]
 
-[node name="Shotgun" type="Node2D" unique_id=1703651934 node_paths=PackedStringArray("audio_player", "raycast", "projectile_spawnpoint", "fire_timer")]
+[node name="Shotgun" type="Node2D" unique_id=1703651934 node_paths=PackedStringArray("audio_player", "raycast", "muzzle_flash", "projectile_spawnpoint", "fire_timer")]
 script = ExtResource("1_36h01")
 shoot_sound = ExtResource("4_qarfq")
 impact_effect = ExtResource("2_41mpv")
 audio_player = NodePath("AudioStreamPlayer")
 raycast = NodePath("Raycast")
+muzzle_flash = NodePath("MuzzleFlash")
 damage = 0.5
 projectile_spawnpoint = NodePath("WeaponAnchor/ShotgunGraphic/ProjectileSpawnpoint")
 fire_timer = NodePath("FireTimer")
@@ -37,3 +40,15 @@ hit_from_inside = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=934029038]
 stream = ExtResource("4_qarfq")
+
+[node name="MuzzleFlash" type="Sprite2D" parent="." unique_id=1478118810]
+position = Vector2(80, -12)
+rotation = 0.7853982
+texture = ExtResource("5_sflqf")
+offset = Vector2(25, -25)
+hframes = 10
+vframes = 9
+script = ExtResource("6_kocch")
+min_frame = 40
+max_frame = 49
+metadata/_custom_type_script = "uid://dahw6ijlago88"

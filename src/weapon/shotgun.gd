@@ -5,6 +5,7 @@ extends Gun
 @export var impact_effect: PackedScene = null
 @export var audio_player: AudioStreamPlayer = null
 @export var raycast: RayCast2D = null
+@export var muzzle_flash: SpriteAnimator = null
 @export var bullets_per_shot: int = 6
 @export var spread: float = PI / 8
 @export_range(0, 1) var evenly_spread_factor: float = 0.8
@@ -49,6 +50,8 @@ func get_trail() -> Line2D:
 	return bullet_trail_pool[_cur_trail_index]
 
 func _fire_shot(direction: float):
+	
+	# raycast collision query
 	var endpoint = Vector2.from_angle(direction - projectile_spawnpoint.global_rotation) * weapon_range
 	if projectile_spawnpoint.global_scale.y < 0:
 		endpoint.y *= -1
@@ -56,11 +59,15 @@ func _fire_shot(direction: float):
 	raycast.force_raycast_update()
 	
 	var trail_length := weapon_range
+	
+	# damage any objects the raycast hits
 	if raycast.is_colliding():
 		var hit_obj := raycast.get_collider()
 		var hit_point :=  raycast.get_collision_point()
 		if hit_obj is Mob:
 			var mob := hit_obj as Mob
+			
+			# if the mob is already dead, ignore this hit and rerun collision
 			if mob.health <= 0:
 				raycast.add_exception(mob)
 				_fire_shot(direction)
@@ -82,6 +89,7 @@ func _fire_shot(direction: float):
 	trail.modulate.a = 1
 
 func fire():
+	muzzle_flash.play()
 	audio_player.play()
 	
 	# reset the raycast
