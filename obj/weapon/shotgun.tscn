@@ -14,7 +14,7 @@ script = ExtResource("1_36h01")
 shoot_sound = ExtResource("4_qarfq")
 audio_player = NodePath("AudioStreamPlayer")
 raycast = NodePath("Raycast")
-muzzle_flash = NodePath("MuzzleFlash")
+muzzle_flash = NodePath("WeaponAnchor/ShotgunGraphic/ProjectileSpawnpoint/MuzzleFlash")
 impact_effects = NodePath("ProjectileHitEffects")
 damage = 0.5
 projectile_spawnpoint = NodePath("WeaponAnchor/ShotgunGraphic/ProjectileSpawnpoint")
@@ -36,17 +36,12 @@ texture = ExtResource("4_owrpd")
 [node name="ProjectileSpawnpoint" type="Marker2D" parent="WeaponAnchor/ShotgunGraphic" unique_id=1161980563]
 position = Vector2(20, -10)
 
-[node name="Raycast" type="RayCast2D" parent="." unique_id=448148110]
-collision_mask = 3
-hit_from_inside = true
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=934029038]
-stream = ExtResource("4_qarfq")
-
-[node name="MuzzleFlash" type="Sprite2D" parent="." unique_id=1478118810]
-position = Vector2(80, -12)
+[node name="MuzzleFlash" type="Sprite2D" parent="WeaponAnchor/ShotgunGraphic/ProjectileSpawnpoint" unique_id=1478118810]
+visible = false
+z_index = 10
+position = Vector2(4, -1)
 rotation = 0.7853982
-scale = Vector2(2, 2)
+scale = Vector2(1.9999999, 1.9999999)
 texture = ExtResource("5_sflqf")
 offset = Vector2(25, -25)
 hframes = 10
@@ -55,6 +50,13 @@ script = ExtResource("6_kocch")
 min_frame = 40
 max_frame = 49
 metadata/_custom_type_script = "uid://dahw6ijlago88"
+
+[node name="Raycast" type="RayCast2D" parent="." unique_id=448148110]
+collision_mask = 3
+hit_from_inside = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=934029038]
+stream = ExtResource("4_qarfq")
 
 [node name="ProjectileHitEffects" type="Node" parent="." unique_id=1401472394 node_paths=PackedStringArray("effect_base")]
 script = ExtResource("7_owrpd")
@@ -65,6 +67,7 @@ metadata/_custom_type_script = "uid://cxlpqv7vp5yq0"
 
 [node name="SpriteAnimator" type="Sprite2D" parent="ProjectileHitEffects" unique_id=2108656231]
 visible = false
+z_index = 10
 texture_filter = 1
 scale = Vector2(2, 2)
 texture = ExtResource("8_m6nev")
