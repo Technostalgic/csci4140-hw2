@@ -4,6 +4,7 @@ extends Node2D
 signal life_expired(gib: Gib)
 
 @export var graphic: Node2D = null
+@export var particles: GPUParticles2D = null
 @export var shadow: Node2D = null
 @export var radius: float = 10
 @export var acceleration: Vector3 = Vector3.FORWARD * 1500
@@ -22,6 +23,7 @@ func _enter_tree() -> void:
 	life = 0
 	modulate.a = 1
 	rotational_vel = (randf() - 0.5) * 20 * PI
+	particles.emitting = true
 
 func _physics_process(delta: float) -> void:
 	
@@ -39,6 +41,7 @@ func _physics_process(delta: float) -> void:
 		velocity.x *= friction
 		velocity.y *= friction
 		rotational_vel *= friction
+		particles.emitting = false
 		if velocity.z > 10 or Vector2(velocity.x, velocity.y).length_squared() > 100000:
 			Game.instance.blood_puddles.spawn_effect(global_position, 0)
 	

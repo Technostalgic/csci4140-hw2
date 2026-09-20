@@ -3,13 +3,84 @@
 [ext_resource type="Script" uid="uid://bjmmx7p55ekty" path="res://src/effects/gib.gd" id="1_qxmd0"]
 [ext_resource type="Texture2D" uid="uid://b3e4kkrfbvr1g" path="res://content/gfx/hero/square_foot.png" id="2_rwf8g"]
 
-[node name="Gib" type="Node2D" unique_id=438570077 node_paths=PackedStringArray("graphic", "shadow")]
+[sub_resource type="Curve" id="Curve_fgmwk"]
+_data = [Vector2(0.7435065, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_ulkt5"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -1.7101109, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_4xhvk"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_fgmwk"]
+curve_x = SubResource("Curve_fgmwk")
+curve_y = SubResource("Curve_ulkt5")
+curve_z = SubResource("Curve_4xhvk")
+
+[sub_resource type="Curve" id="Curve_rwf8g"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_bucga"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 3), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_40t8u"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_bucga"]
+width = 100
+curve_x = SubResource("Curve_rwf8g")
+curve_y = SubResource("Curve_bucga")
+curve_z = SubResource("Curve_40t8u")
+
+[sub_resource type="Curve" id="Curve_jlc28"]
+_limits = [0.0, 366.25, 0.0, 1.0]
+_data = [Vector2(0, 366.25), 0.0, 0.0, 0, 0, Vector2(1, 0), -495.69028, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_nq7gb"]
+curve = SubResource("Curve_jlc28")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sxk85"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+particle_flag_damping_as_friction = true
+emission_shape = 1
+emission_sphere_radius = 13.41
+inherit_velocity_ratio = 0.5
+spread = 180.0
+initial_velocity_min = 89.6
+initial_velocity_max = 210.98
+velocity_limit_curve = SubResource("CurveTexture_nq7gb")
+gravity = Vector3(0, 1000, 0)
+scale_min = 6.0
+scale_max = 6.0
+scale_curve = SubResource("CurveXYZTexture_fgmwk")
+scale_over_velocity_curve = SubResource("CurveXYZTexture_bucga")
+color = Color(0.63, 0, 0, 1)
+
+[node name="Gib" type="Node2D" unique_id=438570077 node_paths=PackedStringArray("graphic", "particles", "shadow")]
 script = ExtResource("1_qxmd0")
 graphic = NodePath("Gfx")
+particles = NodePath("Gfx/Particles")
 shadow = NodePath("Shadow")
 metadata/_custom_type_script = "uid://bjmmx7p55ekty"
 
 [node name="Gfx" type="Node2D" parent="." unique_id=17173877]
+
+[node name="Particles" type="GPUParticles2D" parent="Gfx" unique_id=2037462809]
+amount = 40
+lifetime = 0.5
+randomness = 0.5
+process_material = SubResource("ParticleProcessMaterial_sxk85")
 
 [node name="Fill" type="Polygon2D" parent="Gfx" unique_id=1279222863]
 position = Vector2(-1, -19)
