@@ -46,8 +46,9 @@ debug_color = Color(0.9882353, 0.2509804, 0.32941177, 0.41960785)
 visible = false
 shape = SubResource("CircleShape2D_o3jbo")
 
-[node name="Shotgun" parent="." unique_id=1448111750 instance=ExtResource("5_bdwod")]
+[node name="Shotgun" parent="." unique_id=1448111750 node_paths=PackedStringArray("hero") instance=ExtResource("5_bdwod")]
 position = Vector2(0, -32)
+hero = NodePath("..")
 
 [node name="Healthbar" type="ProgressBar" parent="." unique_id=249806137]
 anchors_preset = -1

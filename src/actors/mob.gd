@@ -6,7 +6,7 @@ var hero: Hero = null
 @export var death_fx: PackedScene = null
 @export var movement_speed: float = 300
 @export var health: float = 2
-@export var knockback_decay: float = 50
+@export var knockback_decay: float = 3000
 
 var knockback_velocity = Vector2.ZERO
 
@@ -14,7 +14,7 @@ func _ready() -> void:
 	hero = Game.instance.hero
 	slime_node.play_walk()
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	var movement := Vector2.ZERO
 	if hero: 
 		movement = (hero.global_position - global_position).normalized() * movement_speed
@@ -23,7 +23,7 @@ func _physics_process(_delta: float) -> void:
 	
 	# knockback velocity friction
 	if knockback_velocity.length_squared() >= 1:
-		knockback_velocity += (-knockback_velocity.normalized() * knockback_decay)
+		knockback_velocity -= knockback_velocity.normalized() * knockback_decay * delta
 		if knockback_velocity.length_squared() <= 1:
 			knockback_velocity = Vector2.ZERO
 

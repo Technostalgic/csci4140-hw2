@@ -11,7 +11,9 @@ signal die()
 @export var happy_boo: Node2D = null
 @export var movement_speed: float = 600
 @export var health: float = 100
+@export var knockback_decay: float = 5000
 
+var knockback_velocity = Vector2.ZERO
 var kills: int = 0
 
 func _physics_process(delta: float) -> void:
@@ -27,9 +29,15 @@ func _physics_process(delta: float) -> void:
 		"move_up", 
 		"move_down"
 	)
-	velocity = movement * movement_speed
+	velocity = movement * movement_speed + knockback_velocity
 	move_and_slide()
 	handle_animation()
+	
+	# knockback velocity friction
+	if knockback_velocity.length_squared() > 1:
+		knockback_velocity -= knockback_velocity.normalized() * knockback_decay * delta
+		if knockback_velocity.length_squared() <= 1:
+			knockback_velocity = Vector2.ZERO
 	
 	# handle damage from mobs
 	var bodies = hurtbox.get_overlapping_bodies()
@@ -49,6 +57,9 @@ func _process(delta: float) -> void:
 func _handle_camera_follow(_delta: float) -> void:
 	if not camera: return
 	camera.global_position = global_position
+
+func knockback(force: Vector2) -> void:
+	knockback_velocity += force
 
 func kill() -> void:
 	

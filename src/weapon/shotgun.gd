@@ -1,6 +1,7 @@
 class_name Shotgun
 extends Gun
 
+@export var hero: Hero = null
 @export var shoot_sound: AudioStream = null
 @export var audio_player: AudioStreamPlayer = null
 @export var raycast: RayCast2D = null
@@ -96,10 +97,14 @@ func fire():
 	raycast.global_position = projectile_spawnpoint.global_position
 	
 	# fire a bullet across a random spread for each bullet in bullets_per_shot
+	var fire_direction := projectile_spawnpoint.global_rotation
 	var spread_delta := (spread * evenly_spread_factor) / bullets_per_shot as float
 	for i in range(bullets_per_shot):
 		var direction_offset := (i - bullets_per_shot * 0.5 + 0.5) * spread_delta
 		var spread_cone := spread / bullets_per_shot * (bullets_per_shot * (1 - evenly_spread_factor))
 		direction_offset += (randf() - 0.5) * spread_cone
-		var direction := projectile_spawnpoint.global_rotation + direction_offset
+		var direction := fire_direction + direction_offset
 		_fire_shot(direction)
+		
+	# apply recoil
+	hero.knockback(Vector2.from_angle(fire_direction) * -1000)
