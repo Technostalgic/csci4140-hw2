@@ -75,9 +75,12 @@ func _fire_shot(direction: float):
 				return
 			
 			# hit mob
-			mob.take_damage(damage)
 			mob.knockback(Vector2.from_angle(direction) * 750)
-			Game.instance.gibs.burst_gibs(1, hit_point, 32, mob.velocity * (randf() * 0.5 - 0.25), 800 + randf() * 300, 500)
+			mob.take_damage(damage)
+			Game.instance.gibs.burst_gibs(
+				1, hit_point, 32,
+				mob.velocity * (randf() * 0.5 - 0.25), 800 + randf() * 300, 500
+			)
 		
 		trail_length = hit_point.distance_to(raycast.global_position)
 		
