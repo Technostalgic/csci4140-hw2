@@ -73,6 +73,7 @@ func _fire_shot(direction: float):
 				_fire_shot(direction)
 				return
 			mob.take_damage(damage)
+			mob.knockback(Vector2.from_angle(direction) * 750)
 		
 		trail_length = hit_point.distance_to(raycast.global_position)
 		
