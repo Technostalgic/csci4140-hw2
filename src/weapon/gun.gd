@@ -6,7 +6,7 @@ extends Node2D
 @export var active: bool = true
 @export var fire_rate: float = 0.3
 
-var ready_to_fire: bool = false
+var ready_to_fire: bool = true
 
 func _ready() -> void:
 	fire_timer.timeout.connect(_fire_timer_timeout)

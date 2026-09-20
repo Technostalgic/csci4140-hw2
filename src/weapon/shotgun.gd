@@ -1,6 +1,8 @@
 class_name Shotgun
 extends Gun
 
+@export var shoot_sound: AudioStream = null
+@export var audio_player: AudioStreamPlayer = null
 @export var raycast: RayCast2D = null
 @export var bullets_per_shot: int = 6
 @export var spread: float = PI / 8
@@ -8,6 +10,10 @@ extends Gun
 @export var weapon_range: float = 1000
 @export var damage: float = 1
 @export var environmental_impact_effect: PackedScene = null
+
+func _ready() -> void:
+	super._ready()
+	audio_player.stream = shoot_sound
 
 func _fire_shot(direction: float):
 	var endpoint = Vector2.from_angle(direction - projectile_spawnpoint.global_rotation) * weapon_range
@@ -29,6 +35,7 @@ func _fire_shot(direction: float):
 		impact.global_position = raycast.get_collision_point()
 
 func fire():
+	audio_player.play()
 	
 	# reset the raycast
 	raycast.clear_exceptions()
