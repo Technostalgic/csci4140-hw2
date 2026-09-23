@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cnue1abfihqkv"
+path="res://.godot/imported/Boss-Hurt 5.wav-73002c9488ce947b6cd475c0e8c113d4.sample"
+
+[deps]
+
+source_file="res://content/sfx/Boss-Hurt 5.wav"
+dest_files=["res://.godot/imported/Boss-Hurt 5.wav-73002c9488ce947b6cd475c0e8c113d4.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

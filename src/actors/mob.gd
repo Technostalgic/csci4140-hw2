@@ -1,6 +1,8 @@
 class_name Mob
 extends CharacterBody2D
 
+signal on_hurt()
+
 var hero: Hero = null
 @export var slime_node: Node2D = null
 @export var movement_speed: float = 300
@@ -35,6 +37,7 @@ func _death_effect() -> void:
 func take_damage(damage: float) -> void:
 	health -= damage
 	slime_node.play_hurt()
+	on_hurt.emit()
 	if health <= 0:
 		kill()
 

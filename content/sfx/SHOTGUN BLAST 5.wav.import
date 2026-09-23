@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c0ap8vb7dbybu"
+path="res://.godot/imported/SHOTGUN BLAST 5.wav-a3dc5a61c7917d5b7ed86c4b25ea2a14.sample"
+
+[deps]
+
+source_file="res://content/sfx/SHOTGUN BLAST 5.wav"
+dest_files=["res://.godot/imported/SHOTGUN BLAST 5.wav-a3dc5a61c7917d5b7ed86c4b25ea2a14.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bl6epfcsbh0gg"
+path="res://.godot/imported/Boss-Death 4.wav-a9128a98831d290bcd6b1d8861e78446.sample"
+
+[deps]
+
+source_file="res://content/sfx/Boss-Death 4.wav"
+dest_files=["res://.godot/imported/Boss-Death 4.wav-a9128a98831d290bcd6b1d8861e78446.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

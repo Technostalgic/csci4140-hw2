@@ -2,18 +2,29 @@
 
 [ext_resource type="PackedScene" uid="uid://ogik4s70pgwl" path="res://obj/actors/slime/slime.tscn" id="1_q4fka"]
 [ext_resource type="Script" uid="uid://w6agg6ufvwvr" path="res://src/actors/mob.gd" id="1_xtcgg"]
-[ext_resource type="PackedScene" uid="uid://dhmhmrth6rdce" path="res://obj/effects/smoke_explosion.tscn" id="2_5hqrb"]
+[ext_resource type="AudioStream" uid="uid://b23s00nj7exy5" path="res://content/sfx/Zombie-hurt.wav" id="4_mo5km"]
 [ext_resource type="Texture2D" uid="uid://dk5b8a84a6n2h" path="res://content/gfx/ground_shadow.png" id="4_t8guv"]
+[ext_resource type="AudioStream" uid="uid://q468wxe2guru" path="res://content/sfx/Zombie-hurt 2.wav" id="5_tnnds"]
+[ext_resource type="AudioStream" uid="uid://bhdk4wtbe7w53" path="res://content/sfx/Zombie-hurt 3.wav" id="6_qrjon"]
+[ext_resource type="AudioStream" uid="uid://b6ieu262l84am" path="res://content/sfx/Zombie-hurt 4.wav" id="7_3j0fn"]
+[ext_resource type="AudioStream" uid="uid://cpyeqto7f8w5e" path="res://content/sfx/Zombie-hurt 5.wav" id="8_qbh7d"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o3jbo"]
 radius = 46.389652
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_evqus"]
+streams_count = 6
+stream_0/stream = ExtResource("4_mo5km")
+stream_1/stream = ExtResource("5_tnnds")
+stream_2/stream = ExtResource("6_qrjon")
+stream_3/stream = ExtResource("7_3j0fn")
+stream_4/stream = ExtResource("8_qbh7d")
 
 [node name="Mob" type="CharacterBody2D" unique_id=1795532236 node_paths=PackedStringArray("slime_node")]
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_xtcgg")
 slime_node = NodePath("Slime")
-death_fx = ExtResource("2_5hqrb")
 
 [node name="Slime" parent="." unique_id=2008890567 instance=ExtResource("1_q4fka")]
 
@@ -25,3 +36,8 @@ texture = ExtResource("4_t8guv")
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=1724985194]
 position = Vector2(0, -21)
 shape = SubResource("CircleShape2D_o3jbo")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1424113681]
+stream = SubResource("AudioStreamRandomizer_evqus")
+
+[connection signal="on_hurt" from="." to="AudioStreamPlayer2D" method="play" binds= [0.0]]
