@@ -2,16 +2,29 @@
 
 [ext_resource type="Script" uid="uid://pyxu55nhookm" path="res://src/weapon/shotgun.gd" id="1_36h01"]
 [ext_resource type="Texture2D" uid="uid://coon1w77o334i" path="res://content/gfx/pistol.png" id="4_owrpd"]
-[ext_resource type="AudioStream" uid="uid://dsnsfw3ykcnpn" path="res://content/sfx/test.wav" id="4_qarfq"]
 [ext_resource type="Texture2D" uid="uid://hd1526c0aud8" path="res://content/gfx/shotgun_blast.png" id="5_sflqf"]
 [ext_resource type="Script" uid="uid://dahw6ijlago88" path="res://src/effects/sprite_animator.gd" id="6_kocch"]
+[ext_resource type="AudioStream" uid="uid://bvfr34joqgh35" path="res://content/sfx/SHOTGUN BLAST.wav" id="6_u5rls"]
 [ext_resource type="Script" uid="uid://cxlpqv7vp5yq0" path="res://src/effects/effect_spawner.gd" id="7_owrpd"]
+[ext_resource type="AudioStream" uid="uid://cybq3nixqgxme" path="res://content/sfx/SHOTGUN BLAST 2.wav" id="7_ujt8h"]
+[ext_resource type="AudioStream" uid="uid://cjcsqj3unpvwl" path="res://content/sfx/SHOTGUN BLAST 3.wav" id="8_6wp3m"]
 [ext_resource type="Texture2D" uid="uid://bg4ubxv7rj0vm" path="res://content/gfx/projectile_sparks.png" id="8_m6nev"]
+[ext_resource type="AudioStream" uid="uid://cs6wblw0uov6f" path="res://content/sfx/SHOTGUN BLAST 4.wav" id="9_et70x"]
+[ext_resource type="AudioStream" uid="uid://c0ap8vb7dbybu" path="res://content/sfx/SHOTGUN BLAST 5.wav" id="10_4ekrf"]
+[ext_resource type="AudioStream" uid="uid://clm2qa8so4xxa" path="res://content/sfx/SHOTGUN BLAST 6.wav" id="11_nvav7"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_mjhdh"]
+streams_count = 6
+stream_0/stream = ExtResource("6_u5rls")
+stream_1/stream = ExtResource("7_ujt8h")
+stream_2/stream = ExtResource("8_6wp3m")
+stream_3/stream = ExtResource("9_et70x")
+stream_4/stream = ExtResource("10_4ekrf")
+stream_5/stream = ExtResource("11_nvav7")
 
 [node name="Shotgun" type="Node2D" unique_id=1703651934 node_paths=PackedStringArray("audio_player", "raycast", "muzzle_flash", "impact_effects", "projectile_spawnpoint", "fire_timer")]
 texture_filter = 1
 script = ExtResource("1_36h01")
-shoot_sound = ExtResource("4_qarfq")
 audio_player = NodePath("AudioStreamPlayer")
 raycast = NodePath("Raycast")
 muzzle_flash = NodePath("WeaponAnchor/ShotgunGraphic/ProjectileSpawnpoint/MuzzleFlash")
@@ -56,7 +69,8 @@ collision_mask = 3
 hit_from_inside = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=934029038]
-stream = ExtResource("4_qarfq")
+stream = SubResource("AudioStreamRandomizer_mjhdh")
+volume_db = -10.0
 
 [node name="ProjectileHitEffects" type="Node2D" parent="." unique_id=1309495653 node_paths=PackedStringArray("effect_base")]
 script = ExtResource("7_owrpd")

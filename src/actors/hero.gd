@@ -2,7 +2,9 @@ class_name Hero
 extends CharacterBody2D
 
 signal die()
+signal on_hurt()
 
+@export var hurtTimer: Timer = null
 @export var death_sound: AudioStream = null
 @export var camera: Camera2D = null
 @export var hurtbox: Area2D = null
@@ -41,9 +43,18 @@ func _physics_process(delta: float) -> void:
 	
 	# handle damage from mobs
 	var bodies = hurtbox.get_overlapping_bodies()
+	var is_hurt: bool = false
 	for body in bodies:
 		if body is Mob:
+			is_hurt = true
 			health -= 5 * delta
+	
+	if is_hurt:
+		on_hurt.emit()
+		if hurtTimer.is_stopped():
+			hurtTimer.start(0)
+	else:
+		hurtTimer.stop()
 	
 	if health <= 0:
 		kill()

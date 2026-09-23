@@ -19,7 +19,6 @@ func spawn_mob() -> void:
 	add_child(slime)
 	slime.global_position = slime_spawner.global_position
 
-
 func _on_hero_die() -> void:
 	get_tree().paused = true
 	gameover_screen.visible = true

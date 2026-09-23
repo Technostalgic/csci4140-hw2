@@ -2,9 +2,15 @@
 
 [ext_resource type="Script" uid="uid://b77tfnmyicptp" path="res://src/actors/hero.gd" id="1_0cirb"]
 [ext_resource type="PackedScene" uid="uid://pbmyh1qru7p" path="res://obj/actors/hero/happy_boo_graphic.tscn" id="1_780bu"]
-[ext_resource type="AudioStream" uid="uid://dsnsfw3ykcnpn" path="res://content/sfx/test.wav" id="2_bdwod"]
+[ext_resource type="AudioStream" uid="uid://btu4dho10ncka" path="res://content/sfx/Player-Death.wav" id="2_bdwod"]
 [ext_resource type="Texture2D" uid="uid://dk5b8a84a6n2h" path="res://content/gfx/ground_shadow.png" id="3_hsbtt"]
 [ext_resource type="PackedScene" uid="uid://cwyjwkmbi18nf" path="res://obj/weapon/shotgun.tscn" id="5_bdwod"]
+[ext_resource type="AudioStream" uid="uid://fnui6oafdygq" path="res://content/sfx/Player-Hurt.wav" id="6_mjhdh"]
+[ext_resource type="AudioStream" uid="uid://phkttmsxl1hq" path="res://content/sfx/Player-Hurt 2.wav" id="7_1bnd1"]
+[ext_resource type="AudioStream" uid="uid://bcbb3ywmrhtlp" path="res://content/sfx/Player-Hurt 3.wav" id="8_n61b6"]
+[ext_resource type="AudioStream" uid="uid://c7pk3rlmfflje" path="res://content/sfx/Player-Hurt 4.wav" id="9_bv8ae"]
+[ext_resource type="AudioStream" uid="uid://bb418sq7xrnxo" path="res://content/sfx/Player-Hurt 5.wav" id="10_325op"]
+[ext_resource type="AudioStream" uid="uid://be8u3l30e0fey" path="res://content/sfx/Player-Hurt 6.wav" id="11_jrnx6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_i738u"]
 radius = 40.04997
@@ -19,8 +25,18 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[node name="Hero" type="CharacterBody2D" unique_id=319609223 node_paths=PackedStringArray("hurtbox", "health_bar", "happy_boo")]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_bdwod"]
+streams_count = 6
+stream_0/stream = ExtResource("6_mjhdh")
+stream_1/stream = ExtResource("7_1bnd1")
+stream_2/stream = ExtResource("8_n61b6")
+stream_3/stream = ExtResource("9_bv8ae")
+stream_4/stream = ExtResource("10_325op")
+stream_5/stream = ExtResource("11_jrnx6")
+
+[node name="Hero" type="CharacterBody2D" unique_id=319609223 node_paths=PackedStringArray("hurtTimer", "hurtbox", "health_bar", "happy_boo")]
 script = ExtResource("1_0cirb")
+hurtTimer = NodePath("HurtSfxTimer")
 death_sound = ExtResource("2_bdwod")
 hurtbox = NodePath("Hurtbox")
 health_bar = NodePath("Healthbar")
@@ -60,3 +76,11 @@ offset_bottom = -139.0
 theme_override_styles/fill = SubResource("StyleBoxFlat_t4k1q")
 value = 100.0
 show_percentage = false
+
+[node name="HurtSfxTimer" type="Timer" parent="." unique_id=80661066]
+wait_time = 0.5
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1318422195]
+stream = SubResource("AudioStreamRandomizer_bdwod")
+
+[connection signal="timeout" from="HurtSfxTimer" to="AudioStreamPlayer2D" method="play" binds= [0.0]]
