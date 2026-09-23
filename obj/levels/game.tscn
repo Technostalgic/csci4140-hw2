@@ -6,8 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://dt4xwrmw805uf" path="res://obj/actors/hero/hero.tscn" id="3_08rg1"]
 [ext_resource type="Script" uid="uid://sddcy6p5b3je" path="res://src/effects/gib_effects.gd" id="3_psfqy"]
 [ext_resource type="PackedScene" uid="uid://bqphum5xcynl1" path="res://obj/effects/gib.tscn" id="4_1nq40"]
-[ext_resource type="AudioStream" uid="uid://dsnsfw3ykcnpn" path="res://content/sfx/test.wav" id="4_08rg1"]
 [ext_resource type="PackedScene" uid="uid://cjfdkan3x1u0o" path="res://obj/props/tree.tscn" id="4_psfqy"]
+[ext_resource type="AudioStream" uid="uid://crke0boody787" path="res://content/sfx/GAME OVER FANFARE.wav" id="5_7deq4"]
 [ext_resource type="Script" uid="uid://cxlpqv7vp5yq0" path="res://src/effects/effect_spawner.gd" id="5_gmrog"]
 [ext_resource type="Texture2D" uid="uid://dk5b8a84a6n2h" path="res://content/gfx/ground_shadow.png" id="6_77nmb"]
 [ext_resource type="Script" uid="uid://5fmm6wlhmjkl" path="res://src/effects/fade_visual.gd" id="6_s1hb5"]
@@ -72,7 +72,7 @@ grow_vertical = 2
 offset_transform_enabled = true
 script = ExtResource("3_4v0g2")
 kills_value_text = NodePath("HBoxContainer/KillsValue")
-sound_effect = ExtResource("4_08rg1")
+sound_effect = ExtResource("5_7deq4")
 music = NodePath("../../../Music")
 
 [node name="GameOverText" type="Label" parent="UiCanvas/Container/GameOver" unique_id=1453005495]

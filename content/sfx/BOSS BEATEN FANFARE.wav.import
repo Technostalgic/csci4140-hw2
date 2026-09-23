@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bloffryqmcq2u"
+path="res://.godot/imported/BOSS BEATEN FANFARE.wav-79bf33d7442eb194834af351c0cd3ee6.sample"
+
+[deps]
+
+source_file="res://content/sfx/BOSS BEATEN FANFARE.wav"
+dest_files=["res://.godot/imported/BOSS BEATEN FANFARE.wav-79bf33d7442eb194834af351c0cd3ee6.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
