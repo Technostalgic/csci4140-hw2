@@ -9,6 +9,7 @@ var hero: Hero = null
 @export var health: float = 2
 @export var knockback_decay: float = 3000
 
+var parent_game: Game = null
 var knockback_velocity = Vector2.ZERO
 
 func _ready() -> void:
@@ -47,5 +48,6 @@ func knockback(force: Vector2) -> void:
 func kill() -> void:
 	_death_effect()
 	queue_free()
+	parent_game.zombie_death(global_position)
 	if hero:
 		hero.kills += 1

@@ -12,6 +12,12 @@
 [ext_resource type="Script" uid="uid://cxlpqv7vp5yq0" path="res://src/effects/effect_spawner.gd" id="5_gmrog"]
 [ext_resource type="Texture2D" uid="uid://dk5b8a84a6n2h" path="res://content/gfx/ground_shadow.png" id="6_77nmb"]
 [ext_resource type="Script" uid="uid://5fmm6wlhmjkl" path="res://src/effects/fade_visual.gd" id="6_s1hb5"]
+[ext_resource type="AudioStream" uid="uid://mdjl31xq2sbg" path="res://content/sfx/Zombie-death.wav" id="13_0i7v2"]
+[ext_resource type="AudioStream" uid="uid://bhwxtl5bu67o6" path="res://content/sfx/Zombie-death 2.wav" id="14_7deq4"]
+[ext_resource type="AudioStream" uid="uid://0lj52d60ic25" path="res://content/sfx/Zombie-death 3.wav" id="15_jacy1"]
+[ext_resource type="AudioStream" uid="uid://n20uej6ipf" path="res://content/sfx/Zombie-death 4.wav" id="16_j711j"]
+[ext_resource type="AudioStream" uid="uid://pgoihutdspcp" path="res://content/sfx/Zombie-death 5.wav" id="17_m5ag3"]
+[ext_resource type="AudioStream" uid="uid://dgkljta73cfjd" path="res://content/sfx/Zombie-death 6.wav" id="18_wthg6"]
 
 [sub_resource type="Curve2D" id="Curve2D_u44n3"]
 _data = {
@@ -19,9 +25,19 @@ _data = {
 }
 point_count = 5
 
-[node name="Game" type="Node2D" unique_id=1688597872 node_paths=PackedStringArray("gameover_screen", "hero", "slime_spawner", "gibs", "blood_puddles")]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_77nmb"]
+streams_count = 6
+stream_0/stream = ExtResource("13_0i7v2")
+stream_1/stream = ExtResource("14_7deq4")
+stream_2/stream = ExtResource("15_jacy1")
+stream_3/stream = ExtResource("16_j711j")
+stream_4/stream = ExtResource("17_m5ag3")
+stream_5/stream = ExtResource("18_wthg6")
+
+[node name="Game" type="Node2D" unique_id=1688597872 node_paths=PackedStringArray("zombie_death_sfx", "gameover_screen", "hero", "slime_spawner", "gibs", "blood_puddles")]
 y_sort_enabled = true
 script = ExtResource("1_pglxl")
+zombie_death_sfx = NodePath("ZombieDeath")
 gameover_screen = NodePath("UiCanvas")
 hero = NodePath("Hero")
 slime_spawner = NodePath("Camera2D/SpawnPath/PathSpawner")
@@ -202,6 +218,9 @@ position = Vector2(1467, 869)
 [node name="Music" type="AudioStreamPlayer" parent="." unique_id=1714095164]
 stream = ExtResource("5_1nq40")
 autoplay = true
+
+[node name="ZombieDeath" type="AudioStreamPlayer2D" parent="." unique_id=1579268634]
+stream = SubResource("AudioStreamRandomizer_77nmb")
 
 [connection signal="pressed" from="UiCanvas/Container/GameOver/RetryButton" to="UiCanvas/Container/GameOver" method="_retry_level"]
 [connection signal="fade_complete" from="BloodPuddles/BloodPuddle/FadeVisual" to="BloodPuddles" method="_on_effect_complete"]

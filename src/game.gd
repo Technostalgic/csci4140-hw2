@@ -3,6 +3,7 @@ extends Node2D
 
 static var instance: Game = null
 
+@export var zombie_death_sfx: AudioStreamPlayer2D = null
 @export var gameover_screen: CanvasLayer = null
 @export var hero: Hero = null
 @export var slime_spawner: PathFollow2D = null
@@ -16,9 +17,14 @@ func _init() -> void:
 func spawn_mob() -> void:
 	slime_spawner.progress_ratio = randf()
 	var slime: Mob = slime_scene.instantiate()
+	slime.parent_game = self
 	add_child(slime)
 	slime.global_position = slime_spawner.global_position
 
 func _on_hero_die() -> void:
 	get_tree().paused = true
 	gameover_screen.visible = true
+
+func zombie_death(pos: Vector2):
+	zombie_death_sfx.global_position = pos
+	zombie_death_sfx.play(0)
