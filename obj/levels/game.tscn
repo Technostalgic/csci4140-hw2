@@ -18,6 +18,7 @@
 [ext_resource type="AudioStream" uid="uid://n20uej6ipf" path="res://content/sfx/Zombie-death 4.wav" id="16_j711j"]
 [ext_resource type="AudioStream" uid="uid://pgoihutdspcp" path="res://content/sfx/Zombie-death 5.wav" id="17_m5ag3"]
 [ext_resource type="AudioStream" uid="uid://dgkljta73cfjd" path="res://content/sfx/Zombie-death 6.wav" id="18_wthg6"]
+[ext_resource type="AudioStream" uid="uid://c4fbtx0mmpjld" path="res://content/sfx/LEVEL START FANFARE.wav" id="19_7deq4"]
 
 [sub_resource type="Curve2D" id="Curve2D_u44n3"]
 _data = {
@@ -222,6 +223,10 @@ autoplay = true
 
 [node name="ZombieDeath" type="AudioStreamPlayer2D" parent="." unique_id=1579268634]
 stream = SubResource("AudioStreamRandomizer_77nmb")
+
+[node name="StartFanfare" type="AudioStreamPlayer" parent="." unique_id=1030523232]
+stream = ExtResource("19_7deq4")
+autoplay = true
 
 [connection signal="pressed" from="UiCanvas/Container/GameOver/RetryButton" to="UiCanvas/Container/GameOver" method="_retry_level"]
 [connection signal="fade_complete" from="BloodPuddles/BloodPuddle/FadeVisual" to="BloodPuddles" method="_on_effect_complete"]
