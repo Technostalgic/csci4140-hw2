@@ -31,7 +31,7 @@ func _physics_process(delta: float) -> void:
 	)
 	velocity = movement * movement_speed + knockback_velocity
 	move_and_slide()
-	handle_animation()
+	
 	
 	# knockback velocity friction
 	if knockback_velocity.length_squared() > 1:
@@ -73,12 +73,3 @@ func kill() -> void:
 	audio.finished.connect(audio.queue_free) # remove audio node when sound effect is done playing
 	get_tree().root.add_child(audio)
 	audio.play()
-
-func handle_animation():
-	# walk animation if moving
-	if velocity.length() > 1:
-		happy_boo.play_walk_animation()
-	
-	# idle animation if not moving
-	else: 
-		happy_boo.play_idle_animation()
