@@ -89,9 +89,9 @@ func _fire_shot(direction: float):
 	
 	# create bullet trail
 	var trail = get_trail()
-	trail.global_position = raycast.global_position
+	trail.global_position = muzzle_flash.global_position
 	trail.global_rotation = direction
-	trail.scale.x = trail_length
+	trail.scale.x = 50
 	trail.modulate.a = 1
 
 func fire():

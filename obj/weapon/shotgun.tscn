@@ -34,7 +34,7 @@ animations = [{
 }],
 "loop": 1,
 "name": &"fire",
-"speed": 5.0
+"speed": 6.0
 }]
 
 [sub_resource type="GDScript" id="GDScript_owrpd"]
@@ -45,9 +45,9 @@ script/source = "extends AnimatedSprite2D
 func _process(delta: float) -> void:
 	var mouse_position = get_global_mouse_position()
 	if mouse_position.x > position.x:
-		flip_h = false
-	elif mouse_position.x < position.x:
 		flip_h = true
+	elif mouse_position.x < position.x:
+		flip_h = false
 	
 	if Input.is_action_just_pressed(\"Shoot\"):
 		shotgun.play(\"fire\")
@@ -78,10 +78,11 @@ position = Vector2(38, 5)
 
 [node name="anim_shotgun" type="AnimatedSprite2D" parent="WeaponAnchor" unique_id=1390781395]
 unique_name_in_owner = true
-position = Vector2(-29, 0)
+position = Vector2(-23, 0)
 sprite_frames = SubResource("SpriteFrames_0yd1l")
 animation = &"fire"
-frame_progress = 0.46322957
+frame = 1
+frame_progress = 0.860666
 script = SubResource("GDScript_owrpd")
 
 [node name="ProjectileSpawnpoint" type="Marker2D" parent="WeaponAnchor/anim_shotgun" unique_id=1161980563]
@@ -90,9 +91,9 @@ position = Vector2(38, -16)
 [node name="MuzzleFlash" type="Sprite2D" parent="WeaponAnchor/anim_shotgun/ProjectileSpawnpoint" unique_id=1478118810]
 visible = false
 z_index = 10
-position = Vector2(4, -1)
+position = Vector2(-30.999996, 13.999998)
 rotation = 0.7853982
-scale = Vector2(1.9999999, 1.9999999)
+scale = Vector2(0.16152251, 0.16152251)
 texture = ExtResource("5_sflqf")
 offset = Vector2(25, -25)
 hframes = 10
@@ -110,6 +111,7 @@ hit_from_inside = true
 stream = ExtResource("4_qarfq")
 
 [node name="ProjectileHitEffects" type="Node2D" parent="." unique_id=1309495653 node_paths=PackedStringArray("effect_base")]
+scale = Vector2(0.6399058, 0.6399058)
 script = ExtResource("7_owrpd")
 effect_base = NodePath("HitSparks")
 randomize_h_flip = true

@@ -160,6 +160,7 @@ camera = NodePath("../Camera2D")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1658956134]
 position = Vector2(929, 492)
+zoom = Vector2(4.68, 4.68)
 
 [node name="SpawnPath" type="Path2D" parent="Camera2D" unique_id=1335888819]
 position = Vector2(-929, -492)
