@@ -12,7 +12,7 @@ signal die()
 @export var gun: Gun = null
 @export var movement_speed: float = 600
 @export var health: float = 100
-@export var knockback_decay: float = 5000
+@export var knockback_decay: float = 500
 
 var knockback_velocity = Vector2.ZERO
 var kills: int = 0

@@ -5,7 +5,7 @@ var hero: Hero = null
 @export var hurt_sfx: AudioStreamPlayer2D = null
 @export var movement_speed: float = 20
 @export var health: float = 2
-@export var knockback_decay: float = 3000
+@export var knockback_decay: float = 300
 
 var knockback_velocity = Vector2.ZERO
 
@@ -28,8 +28,8 @@ func _physics_process(delta: float) -> void:
 
 func _death_effect() -> void:
 	Game.instance.gibs.burst_gibs(
-		4, global_position, 16,
-		knockback_velocity.normalized() * 600, 400 + randf() * 300, 100
+		4, global_position, 5,
+		knockback_velocity.normalized() * 60, 40 + randf() * 30, 10
 	)
 
 func take_damage(damage: float) -> void:

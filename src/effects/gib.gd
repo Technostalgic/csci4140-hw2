@@ -7,7 +7,7 @@ signal life_expired(gib: Gib)
 @export var particles: GPUParticles2D = null
 @export var shadow: Node2D = null
 @export var radius: float = 10
-@export var acceleration: Vector3 = Vector3.FORWARD * 1500
+@export var acceleration: Vector3 = Vector3.FORWARD * 300
 @export var bounciness: float = 0.5
 @export var friction: float = 0.9
 @export var ground_life: float = 0.25
@@ -42,7 +42,7 @@ func _physics_process(delta: float) -> void:
 		velocity.y *= friction
 		rotational_vel *= friction
 		particles.emitting = false
-		if velocity.z > 10 or Vector2(velocity.x, velocity.y).length_squared() > 100000:
+		if velocity.z > 3 or Vector2(velocity.x, velocity.y).length_squared() > 1000:
 			Game.instance.blood_puddles.spawn_effect(global_position, 0)
 	
 	shadow.position.y = air_height

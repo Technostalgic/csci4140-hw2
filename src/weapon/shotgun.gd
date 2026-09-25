@@ -73,11 +73,11 @@ func _fire_shot(direction: float):
 				return
 			
 			# hit mob
-			mob.knockback(Vector2.from_angle(direction) * 750)
+			mob.knockback(Vector2.from_angle(direction) * 150)
 			mob.take_damage(damage)
 			Game.instance.gibs.burst_gibs(
-				1, hit_point, 32,
-				mob.velocity * (randf() * 0.5 - 0.25), 800 + randf() * 300, 500
+				1, hit_point, 5,
+				mob.velocity * (randf() * 0.5 - 0.25), 80 + randf() * 30, 50
 			)
 		
 		trail_length = hit_point.distance_to(raycast.global_position)
@@ -111,4 +111,4 @@ func fire():
 		_fire_shot(direction)
 		
 	# apply recoil
-	hero.knockback(Vector2.from_angle(fire_direction) * -1000)
+	hero.knockback(Vector2.from_angle(fire_direction) * -100)

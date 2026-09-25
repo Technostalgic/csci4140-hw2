@@ -148,7 +148,7 @@ metadata/_custom_type_script = "uid://cxlpqv7vp5yq0"
 
 [node name="BloodPuddle" type="Sprite2D" parent="BloodPuddles" unique_id=1337570083]
 modulate = Color(0.46666667, 0, 0, 1)
-scale = Vector2(0.23000002, 0.23000002)
+scale = Vector2(0.1, 0.1)
 texture = ExtResource("6_77nmb")
 
 [node name="FadeVisual" type="Node" parent="BloodPuddles/BloodPuddle" unique_id=1825953653 node_paths=PackedStringArray("target_graphic")]
