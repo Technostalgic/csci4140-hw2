@@ -5,6 +5,7 @@ static var instance: Game = null
 
 @export var gameover_screen: CanvasLayer = null
 @export var start_sfx: AudioStreamPlayer = null
+@export var zombie_sfx: AudioStreamPlayer2D = null
 @export var hero: Hero = null
 @export var slime_spawner: PathFollow2D = null
 @export var slime_scene: PackedScene = null

@@ -13,6 +13,12 @@
 [ext_resource type="Script" uid="uid://5fmm6wlhmjkl" path="res://src/effects/fade_visual.gd" id="6_s1hb5"]
 [ext_resource type="AudioStream" uid="uid://cwniqtloe1bpi" path="res://content/sfx/zombiessss-main-demo1.wav" id="13_ntfxu"]
 [ext_resource type="AudioStream" uid="uid://c4fbtx0mmpjld" path="res://content/sfx/LEVEL START FANFARE.wav" id="13_tgi6r"]
+[ext_resource type="AudioStream" uid="uid://mdjl31xq2sbg" path="res://content/sfx/Zombie-death.wav" id="14_7deq4"]
+[ext_resource type="AudioStream" uid="uid://bhwxtl5bu67o6" path="res://content/sfx/Zombie-death 2.wav" id="15_jacy1"]
+[ext_resource type="AudioStream" uid="uid://0lj52d60ic25" path="res://content/sfx/Zombie-death 3.wav" id="16_j711j"]
+[ext_resource type="AudioStream" uid="uid://n20uej6ipf" path="res://content/sfx/Zombie-death 4.wav" id="17_m5ag3"]
+[ext_resource type="AudioStream" uid="uid://pgoihutdspcp" path="res://content/sfx/Zombie-death 5.wav" id="18_wthg6"]
+[ext_resource type="AudioStream" uid="uid://dgkljta73cfjd" path="res://content/sfx/Zombie-death 6.wav" id="19_m47fh"]
 
 [sub_resource type="Curve2D" id="Curve2D_u44n3"]
 _data = {
@@ -22,11 +28,21 @@ point_count = 5
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0yd1l"]
 
-[node name="Game" type="Node2D" unique_id=1688597872 node_paths=PackedStringArray("gameover_screen", "start_sfx", "hero", "slime_spawner", "gibs", "blood_puddles")]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ntfxu"]
+streams_count = 6
+stream_0/stream = ExtResource("14_7deq4")
+stream_1/stream = ExtResource("15_jacy1")
+stream_2/stream = ExtResource("16_j711j")
+stream_3/stream = ExtResource("17_m5ag3")
+stream_4/stream = ExtResource("18_wthg6")
+stream_5/stream = ExtResource("19_m47fh")
+
+[node name="Game" type="Node2D" unique_id=1688597872 node_paths=PackedStringArray("gameover_screen", "start_sfx", "zombie_sfx", "hero", "slime_spawner", "gibs", "blood_puddles")]
 y_sort_enabled = true
 script = ExtResource("1_pglxl")
 gameover_screen = NodePath("UiCanvas")
 start_sfx = NodePath("StartSfx")
+zombie_sfx = NodePath("ZombieDeathSfx")
 hero = NodePath("Hero")
 slime_spawner = NodePath("Camera2D/SpawnPath/PathSpawner")
 slime_scene = ExtResource("2_4v0g2")
@@ -237,6 +253,9 @@ shape = SubResource("RectangleShape2D_0yd1l")
 
 [node name="StartSfx" type="AudioStreamPlayer" parent="." unique_id=2018320568]
 stream = ExtResource("13_tgi6r")
+
+[node name="ZombieDeathSfx" type="AudioStreamPlayer2D" parent="." unique_id=1049753364]
+stream = SubResource("AudioStreamRandomizer_ntfxu")
 
 [connection signal="pressed" from="UiCanvas/Container/GameOver/RetryButton" to="UiCanvas/Container/GameOver" method="_retry_level"]
 [connection signal="fade_complete" from="BloodPuddles/BloodPuddle/FadeVisual" to="BloodPuddles" method="_on_effect_complete"]

@@ -42,7 +42,9 @@ func knockback(force: Vector2) -> void:
 	knockback_velocity += force
 
 func kill() -> void:
-	_death_effect()
-	queue_free()
 	if hero:
 		hero.kills += 1
+		Game.instance.global_position = global_position
+		Game.instance.zombie_sfx.play()
+	_death_effect()
+	queue_free()
