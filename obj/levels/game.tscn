@@ -10,12 +10,13 @@
 [ext_resource type="PackedScene" uid="uid://cjfdkan3x1u0o" path="res://obj/props/tree.tscn" id="4_psfqy"]
 [ext_resource type="AudioStream" uid="uid://g5j5576qqned" path="res://content/sfx/AiHolocaust.wav" id="5_1nq40"]
 [ext_resource type="Script" uid="uid://cxlpqv7vp5yq0" path="res://src/effects/effect_spawner.gd" id="5_gmrog"]
+[ext_resource type="PackedScene" uid="uid://imwl73wa0p84" path="res://zombie_neighborhood.tscn" id="5_ntfxu"]
 [ext_resource type="Texture2D" uid="uid://dk5b8a84a6n2h" path="res://content/gfx/ground_shadow.png" id="6_77nmb"]
 [ext_resource type="Script" uid="uid://5fmm6wlhmjkl" path="res://src/effects/fade_visual.gd" id="6_s1hb5"]
 
 [sub_resource type="Curve2D" id="Curve2D_u44n3"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -135, -160, 0, 0, 0, 0, 2035, -160, 0, 0, 0, 0, 2035, 1220, 0, 0, 0, 0, -135, 1220, 0, 0, 0, 0, -135, -160)
+"points": PackedVector2Array(0, 0, 0, 0, 48, 50, 0, 0, 0, 0, 1818, 72, 0, 0, 0, 0, 1790, 932, 0, 0, 0, 0, 32, 898, 0, 0, 0, 0, 10, 41)
 }
 point_count = 5
 
@@ -115,16 +116,8 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 22
 text = "50"
 
-[node name="GroundCanvas" type="CanvasLayer" parent="." unique_id=20825355]
-layer = -1
-
-[node name="Ground" type="ColorRect" parent="GroundCanvas" unique_id=2072284756]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.5069161, 0.57526225, 0.63503057, 1)
+[node name="zombie_neighborhood" parent="." unique_id=1605390774 instance=ExtResource("5_ntfxu")]
+position = Vector2(-171, 290)
 
 [node name="BloodPuddles" type="Node2D" parent="." unique_id=768244834 node_paths=PackedStringArray("effect_base")]
 z_index = -1
@@ -166,7 +159,7 @@ position = Vector2(-929, -492)
 curve = SubResource("Curve2D_u44n3")
 
 [node name="PathSpawner" type="PathFollow2D" parent="Camera2D/SpawnPath" unique_id=1370164637]
-position = Vector2(-135, -160)
+position = Vector2(48, 50)
 rotates = false
 cubic_interp = false
 loop = false
