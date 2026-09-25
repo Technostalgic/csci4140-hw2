@@ -118,6 +118,7 @@ hit_from_inside = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=934029038]
 stream = SubResource("AudioStreamRandomizer_77nmb")
+volume_db = -10.0
 
 [node name="ProjectileHitEffects" type="Node2D" parent="." unique_id=1309495653 node_paths=PackedStringArray("effect_base")]
 scale = Vector2(0.6399058, 0.6399058)

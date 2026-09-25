@@ -4,6 +4,8 @@ extends CharacterBody2D
 signal die()
 
 @export var death_sound: AudioStream = null
+@export var hurt_timer: Timer = null
+@export var hurt_sfx: AudioStreamPlayer = null
 @export var camera: Camera2D = null
 @export var hurtbox: Area2D = null
 @export var health_bar: ProgressBar = null
@@ -40,13 +42,18 @@ func _physics_process(delta: float) -> void:
 	
 	# handle damage from mobs
 	var bodies = hurtbox.get_overlapping_bodies()
+	var hurt: bool = false
 	for body in bodies:
 		if body is Mob:
+			hurt = true
 			health -= 5 * delta
-		
-	
+			
 	if health <= 0:
 		kill()
+	
+	if hurt and hurt_timer.time_left <= 0:
+		hurt_sfx.play()
+		hurt_timer.start()
 	
 	# display health in progress bar
 	health_bar.value = health

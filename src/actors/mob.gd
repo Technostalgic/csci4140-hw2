@@ -34,6 +34,7 @@ func _death_effect() -> void:
 
 func take_damage(damage: float) -> void:
 	health -= damage
+	hurt_sfx.play()
 	if health <= 0:
 		kill()
 
