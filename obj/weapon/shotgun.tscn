@@ -63,6 +63,7 @@ audio_player = NodePath("AudioStreamPlayer")
 raycast = NodePath("Raycast")
 muzzle_flash = NodePath("WeaponAnchor/anim_shotgun/ProjectileSpawnpoint/MuzzleFlash")
 impact_effects = NodePath("ProjectileHitEffects")
+spread = 0.708
 damage = 0.5
 projectile_spawnpoint = NodePath("WeaponAnchor/anim_shotgun/ProjectileSpawnpoint")
 fire_timer = NodePath("FireTimer")
