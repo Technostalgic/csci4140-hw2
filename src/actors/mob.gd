@@ -2,7 +2,7 @@ class_name Mob
 extends CharacterBody2D
 
 var hero: Hero = null
-@export var slime_node: Node2D = null
+@export var hurt_sfx: AudioStreamPlayer2D = null
 @export var movement_speed: float = 20
 @export var health: float = 2
 @export var knockback_decay: float = 3000
