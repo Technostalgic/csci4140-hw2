@@ -24,6 +24,7 @@ script = ExtResource("1_0cirb")
 death_sound = ExtResource("2_bdwod")
 hurtbox = NodePath("Hurtbox")
 health_bar = NodePath("Healthbar")
+movement_speed = 200.0
 metadata/_custom_type_script = "uid://b77tfnmyicptp"
 
 [node name="player_char" parent="." unique_id=1330621787 instance=ExtResource("3_bdwod")]
