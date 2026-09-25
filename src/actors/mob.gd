@@ -2,16 +2,16 @@ class_name Mob
 extends CharacterBody2D
 
 var hero: Hero = null
-@export var slime_node: Node2D = null
-@export var movement_speed: float = 300
+@export var hurt_sfx: AudioStreamPlayer2D = null
+@export var movement_speed: float = 20
 @export var health: float = 2
-@export var knockback_decay: float = 3000
+@export var knockback_decay: float = 300
 
 var knockback_velocity = Vector2.ZERO
 
 func _ready() -> void:
 	hero = Game.instance.hero
-	slime_node.play_walk()
+	
 
 func _physics_process(delta: float) -> void:
 	var movement := Vector2.ZERO
@@ -28,13 +28,13 @@ func _physics_process(delta: float) -> void:
 
 func _death_effect() -> void:
 	Game.instance.gibs.burst_gibs(
-		4, global_position, 16,
-		knockback_velocity.normalized() * 600, 400 + randf() * 300, 100
+		4, global_position, 5,
+		knockback_velocity.normalized() * 60, 40 + randf() * 30, 10
 	)
 
 func take_damage(damage: float) -> void:
 	health -= damage
-	slime_node.play_hurt()
+	hurt_sfx.play()
 	if health <= 0:
 		kill()
 
@@ -42,7 +42,9 @@ func knockback(force: Vector2) -> void:
 	knockback_velocity += force
 
 func kill() -> void:
-	_death_effect()
-	queue_free()
 	if hero:
 		hero.kills += 1
+		Game.instance.global_position = global_position
+		Game.instance.zombie_sfx.play()
+	_death_effect()
+	queue_free()

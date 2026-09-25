@@ -1,8 +1,8 @@
 class_name GameOver
 extends Control
 
+@export var lose_sfx: AudioStreamPlayer = null
 @export var kills_value_text: Label = null
-@export var sound_effect: AudioStream = null
 @export var music: AudioStreamPlayer = null
 @export var popup_delay: float = 1
 @export var animation_time: float = 0.5
@@ -56,11 +56,7 @@ func _handle_animation(delta: float) -> void:
 	# stop the music and play the sound effect
 	if not _sound_played:
 		music.stop()
-		var audio := AudioStreamPlayer.new()
-		audio.stream = sound_effect
-		audio.finished.connect(audio.queue_free) # remove audio node when sound effect is done playing
-		get_tree().root.add_child(audio)
-		audio.play()
+		lose_sfx.play()
 		_sound_played = true
 	
 	if anim_delta >= animation_time:

@@ -6,23 +6,43 @@
 [ext_resource type="PackedScene" uid="uid://dt4xwrmw805uf" path="res://obj/actors/hero/hero.tscn" id="3_08rg1"]
 [ext_resource type="Script" uid="uid://sddcy6p5b3je" path="res://src/effects/gib_effects.gd" id="3_psfqy"]
 [ext_resource type="PackedScene" uid="uid://bqphum5xcynl1" path="res://obj/effects/gib.tscn" id="4_1nq40"]
-[ext_resource type="AudioStream" uid="uid://dsnsfw3ykcnpn" path="res://content/sfx/test.wav" id="4_08rg1"]
-[ext_resource type="PackedScene" uid="uid://cjfdkan3x1u0o" path="res://obj/props/tree.tscn" id="4_psfqy"]
-[ext_resource type="AudioStream" uid="uid://g5j5576qqned" path="res://content/sfx/AiHolocaust.wav" id="5_1nq40"]
 [ext_resource type="Script" uid="uid://cxlpqv7vp5yq0" path="res://src/effects/effect_spawner.gd" id="5_gmrog"]
+[ext_resource type="PackedScene" uid="uid://imwl73wa0p84" path="res://zombie_neighborhood.tscn" id="5_ntfxu"]
+[ext_resource type="AudioStream" uid="uid://crke0boody787" path="res://content/sfx/GAME OVER FANFARE.wav" id="5_tgi6r"]
 [ext_resource type="Texture2D" uid="uid://dk5b8a84a6n2h" path="res://content/gfx/ground_shadow.png" id="6_77nmb"]
 [ext_resource type="Script" uid="uid://5fmm6wlhmjkl" path="res://src/effects/fade_visual.gd" id="6_s1hb5"]
+[ext_resource type="AudioStream" uid="uid://cwniqtloe1bpi" path="res://content/sfx/zombiessss-main-demo1.wav" id="13_ntfxu"]
+[ext_resource type="AudioStream" uid="uid://c4fbtx0mmpjld" path="res://content/sfx/LEVEL START FANFARE.wav" id="13_tgi6r"]
+[ext_resource type="AudioStream" uid="uid://mdjl31xq2sbg" path="res://content/sfx/Zombie-death.wav" id="14_7deq4"]
+[ext_resource type="AudioStream" uid="uid://bhwxtl5bu67o6" path="res://content/sfx/Zombie-death 2.wav" id="15_jacy1"]
+[ext_resource type="AudioStream" uid="uid://0lj52d60ic25" path="res://content/sfx/Zombie-death 3.wav" id="16_j711j"]
+[ext_resource type="AudioStream" uid="uid://n20uej6ipf" path="res://content/sfx/Zombie-death 4.wav" id="17_m5ag3"]
+[ext_resource type="AudioStream" uid="uid://pgoihutdspcp" path="res://content/sfx/Zombie-death 5.wav" id="18_wthg6"]
+[ext_resource type="AudioStream" uid="uid://dgkljta73cfjd" path="res://content/sfx/Zombie-death 6.wav" id="19_m47fh"]
 
 [sub_resource type="Curve2D" id="Curve2D_u44n3"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -135, -160, 0, 0, 0, 0, 2035, -160, 0, 0, 0, 0, 2035, 1220, 0, 0, 0, 0, -135, 1220, 0, 0, 0, 0, -135, -160)
+"points": PackedVector2Array(0, 0, 0, 0, 48, 50, 0, 0, 0, 0, 1818, 72, 0, 0, 0, 0, 1790, 932, 0, 0, 0, 0, 32, 898, 0, 0, 0, 0, 10, 41)
 }
 point_count = 5
 
-[node name="Game" type="Node2D" unique_id=1688597872 node_paths=PackedStringArray("gameover_screen", "hero", "slime_spawner", "gibs", "blood_puddles")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0yd1l"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ntfxu"]
+streams_count = 6
+stream_0/stream = ExtResource("14_7deq4")
+stream_1/stream = ExtResource("15_jacy1")
+stream_2/stream = ExtResource("16_j711j")
+stream_3/stream = ExtResource("17_m5ag3")
+stream_4/stream = ExtResource("18_wthg6")
+stream_5/stream = ExtResource("19_m47fh")
+
+[node name="Game" type="Node2D" unique_id=1688597872 node_paths=PackedStringArray("gameover_screen", "start_sfx", "zombie_sfx", "hero", "slime_spawner", "gibs", "blood_puddles")]
 y_sort_enabled = true
 script = ExtResource("1_pglxl")
 gameover_screen = NodePath("UiCanvas")
+start_sfx = NodePath("StartSfx")
+zombie_sfx = NodePath("ZombieDeathSfx")
 hero = NodePath("Hero")
 slime_spawner = NodePath("Camera2D/SpawnPath/PathSpawner")
 slime_scene = ExtResource("2_4v0g2")
@@ -40,7 +60,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="GameOver" type="Panel" parent="UiCanvas/Container" unique_id=1086421409 node_paths=PackedStringArray("kills_value_text", "music")]
+[node name="GameOver" type="Panel" parent="UiCanvas/Container" unique_id=1086421409 node_paths=PackedStringArray("lose_sfx", "kills_value_text", "music")]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -55,8 +75,8 @@ grow_horizontal = 2
 grow_vertical = 2
 offset_transform_enabled = true
 script = ExtResource("3_4v0g2")
+lose_sfx = NodePath("LoseSfx")
 kills_value_text = NodePath("HBoxContainer/KillsValue")
-sound_effect = ExtResource("4_08rg1")
 music = NodePath("../../../Music")
 
 [node name="GameOverText" type="Label" parent="UiCanvas/Container/GameOver" unique_id=1453005495]
@@ -115,16 +135,8 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 22
 text = "50"
 
-[node name="GroundCanvas" type="CanvasLayer" parent="." unique_id=20825355]
-layer = -1
-
-[node name="Ground" type="ColorRect" parent="GroundCanvas" unique_id=2072284756]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.5069161, 0.57526225, 0.63503057, 1)
+[node name="LoseSfx" type="AudioStreamPlayer" parent="UiCanvas/Container/GameOver" unique_id=1839544839]
+stream = ExtResource("5_tgi6r")
 
 [node name="BloodPuddles" type="Node2D" parent="." unique_id=768244834 node_paths=PackedStringArray("effect_base")]
 z_index = -1
@@ -136,7 +148,7 @@ metadata/_custom_type_script = "uid://cxlpqv7vp5yq0"
 
 [node name="BloodPuddle" type="Sprite2D" parent="BloodPuddles" unique_id=1337570083]
 modulate = Color(0.46666667, 0, 0, 1)
-scale = Vector2(0.75, 0.75)
+scale = Vector2(0.1, 0.1)
 texture = ExtResource("6_77nmb")
 
 [node name="FadeVisual" type="Node" parent="BloodPuddles/BloodPuddle" unique_id=1825953653 node_paths=PackedStringArray("target_graphic")]
@@ -160,48 +172,90 @@ camera = NodePath("../Camera2D")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1658956134]
 position = Vector2(929, 492)
+zoom = Vector2(4.68, 4.68)
 
 [node name="SpawnPath" type="Path2D" parent="Camera2D" unique_id=1335888819]
 position = Vector2(-929, -492)
 curve = SubResource("Curve2D_u44n3")
 
 [node name="PathSpawner" type="PathFollow2D" parent="Camera2D/SpawnPath" unique_id=1370164637]
-position = Vector2(-135, -160)
+position = Vector2(48, 50)
 rotates = false
 cubic_interp = false
 loop = false
+
+[node name="zombie_neighborhood" parent="." unique_id=1605390774 instance=ExtResource("5_ntfxu")]
+z_index = -100
+position = Vector2(-171, 290)
 
 [node name="SpawnTimer" type="Timer" parent="." unique_id=920829315]
 wait_time = 0.3
 autostart = true
 
-[node name="Tree" parent="." unique_id=1716713896 instance=ExtResource("4_psfqy")]
-position = Vector2(438, 280)
-
-[node name="Tree2" parent="." unique_id=1161008693 instance=ExtResource("4_psfqy")]
-position = Vector2(752, 132)
-
-[node name="Tree3" parent="." unique_id=690230934 instance=ExtResource("4_psfqy")]
-position = Vector2(1460, 324)
-
-[node name="Tree4" parent="." unique_id=1178045182 instance=ExtResource("4_psfqy")]
-position = Vector2(1125, 44)
-
-[node name="Tree5" parent="." unique_id=438296169 instance=ExtResource("4_psfqy")]
-position = Vector2(280, -260)
-
-[node name="Tree6" parent="." unique_id=1675961423 instance=ExtResource("4_psfqy")]
-position = Vector2(2, 212)
-
-[node name="Tree7" parent="." unique_id=1871695906 instance=ExtResource("4_psfqy")]
-position = Vector2(526, 684)
-
-[node name="Tree8" parent="." unique_id=1022609984 instance=ExtResource("4_psfqy")]
-position = Vector2(1467, 869)
-
 [node name="Music" type="AudioStreamPlayer" parent="." unique_id=1714095164]
-stream = ExtResource("5_1nq40")
+stream = ExtResource("13_ntfxu")
+volume_db = -10.0
 autoplay = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=2084507616]
+position = Vector2(-119, 597)
+scale = Vector2(0.080001205, 3.88)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1493273886]
+position = Vector2(0, -1.2886597)
+scale = Vector2(1, 0.83357376)
+shape = SubResource("RectangleShape2D_0yd1l")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=353366508]
+position = Vector2(-155.99998, 559)
+rotation = -1.5711919
+scale = Vector2(0.080001205, 3.88)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" unique_id=2119492708]
+shape = SubResource("RectangleShape2D_0yd1l")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="." unique_id=507606730]
+position = Vector2(-155.99998, 624)
+rotation = -1.5711919
+scale = Vector2(0.080001205, 3.88)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3" unique_id=898500584]
+shape = SubResource("RectangleShape2D_0yd1l")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="." unique_id=369408936]
+position = Vector2(1677.9999, 592.00006)
+rotation = -2.4033618
+scale = Vector2(0.033430453, 5.953893)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4" unique_id=1515222457]
+position = Vector2(0, -1.2886597)
+scale = Vector2(1, 0.83357376)
+shape = SubResource("RectangleShape2D_0yd1l")
+
+[node name="StaticBody2D5" type="StaticBody2D" parent="." unique_id=1946342110]
+position = Vector2(1613, 557)
+rotation = -1.5727469
+scale = Vector2(0.080001205, 3.88)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D5" unique_id=1702747113]
+position = Vector2(-65.66852, 33.502575)
+shape = SubResource("RectangleShape2D_0yd1l")
+
+[node name="StaticBody2D6" type="StaticBody2D" parent="." unique_id=1920695544]
+position = Vector2(1613, 622)
+rotation = -1.5727469
+scale = Vector2(0.080001205, 3.88)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D6" unique_id=71106509]
+position = Vector2(-139.32626, 19.324327)
+scale = Vector2(-0.5295863, 1.2183604)
+shape = SubResource("RectangleShape2D_0yd1l")
+
+[node name="StartSfx" type="AudioStreamPlayer" parent="." unique_id=2018320568]
+stream = ExtResource("13_tgi6r")
+
+[node name="ZombieDeathSfx" type="AudioStreamPlayer2D" parent="." unique_id=1049753364]
+stream = SubResource("AudioStreamRandomizer_ntfxu")
 
 [connection signal="pressed" from="UiCanvas/Container/GameOver/RetryButton" to="UiCanvas/Container/GameOver" method="_retry_level"]
 [connection signal="fade_complete" from="BloodPuddles/BloodPuddle/FadeVisual" to="BloodPuddles" method="_on_effect_complete"]

@@ -1,23 +1,79 @@
 [gd_scene format=3 uid="uid://cwyjwkmbi18nf"]
 
 [ext_resource type="Script" uid="uid://pyxu55nhookm" path="res://src/weapon/shotgun.gd" id="1_36h01"]
-[ext_resource type="Texture2D" uid="uid://coon1w77o334i" path="res://content/gfx/pistol.png" id="4_owrpd"]
-[ext_resource type="AudioStream" uid="uid://dsnsfw3ykcnpn" path="res://content/sfx/test.wav" id="4_qarfq"]
+[ext_resource type="Texture2D" uid="uid://c7cibhjd82kdi" path="res://content/tiles/PostApocalypse_AssetPack_v1.1.2/Character/Guns/Shotgun/Shotgun_side-left_shoot-Sheet3.png" id="3_owrpd"]
+[ext_resource type="AudioStream" uid="uid://bvfr34joqgh35" path="res://content/sfx/SHOTGUN BLAST.wav" id="5_gnk66"]
 [ext_resource type="Texture2D" uid="uid://hd1526c0aud8" path="res://content/gfx/shotgun_blast.png" id="5_sflqf"]
 [ext_resource type="Script" uid="uid://dahw6ijlago88" path="res://src/effects/sprite_animator.gd" id="6_kocch"]
+[ext_resource type="AudioStream" uid="uid://cybq3nixqgxme" path="res://content/sfx/SHOTGUN BLAST 2.wav" id="6_u5rls"]
 [ext_resource type="Script" uid="uid://cxlpqv7vp5yq0" path="res://src/effects/effect_spawner.gd" id="7_owrpd"]
+[ext_resource type="AudioStream" uid="uid://cjcsqj3unpvwl" path="res://content/sfx/SHOTGUN BLAST 3.wav" id="7_ujt8h"]
+[ext_resource type="AudioStream" uid="uid://cs6wblw0uov6f" path="res://content/sfx/SHOTGUN BLAST 4.wav" id="8_6wp3m"]
 [ext_resource type="Texture2D" uid="uid://bg4ubxv7rj0vm" path="res://content/gfx/projectile_sparks.png" id="8_m6nev"]
+[ext_resource type="AudioStream" uid="uid://c0ap8vb7dbybu" path="res://content/sfx/SHOTGUN BLAST 5.wav" id="9_et70x"]
+[ext_resource type="AudioStream" uid="uid://clm2qa8so4xxa" path="res://content/sfx/SHOTGUN BLAST 6.wav" id="10_4ekrf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m6nev"]
+atlas = ExtResource("3_owrpd")
+region = Rect2(0, 0, 18, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6v5et"]
+atlas = ExtResource("3_owrpd")
+region = Rect2(18, 0, 18, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6k0x2"]
+atlas = ExtResource("3_owrpd")
+region = Rect2(36, 0, 18, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0yd1l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m6nev")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6v5et")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6k0x2")
+}],
+"loop": 1,
+"name": &"fire",
+"speed": 6.0
+}]
+
+[sub_resource type="GDScript" id="GDScript_owrpd"]
+script/source = "extends AnimatedSprite2D
+
+@onready var shotgun = %anim_shotgun
+
+func _process(delta: float) -> void:
+	
+	if Input.is_action_just_pressed(\"Shoot\"):
+		shotgun.play(\"fire\")
+		await get_tree().create_timer(.5).timeout
+		shotgun.stop()
+"
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_77nmb"]
+streams_count = 6
+stream_0/stream = ExtResource("5_gnk66")
+stream_1/stream = ExtResource("6_u5rls")
+stream_2/stream = ExtResource("7_ujt8h")
+stream_3/stream = ExtResource("8_6wp3m")
+stream_4/stream = ExtResource("9_et70x")
+stream_5/stream = ExtResource("10_4ekrf")
 
 [node name="Shotgun" type="Node2D" unique_id=1703651934 node_paths=PackedStringArray("audio_player", "raycast", "muzzle_flash", "impact_effects", "projectile_spawnpoint", "fire_timer")]
 texture_filter = 1
 script = ExtResource("1_36h01")
-shoot_sound = ExtResource("4_qarfq")
 audio_player = NodePath("AudioStreamPlayer")
 raycast = NodePath("Raycast")
-muzzle_flash = NodePath("WeaponAnchor/ShotgunGraphic/ProjectileSpawnpoint/MuzzleFlash")
+muzzle_flash = NodePath("WeaponAnchor/anim_shotgun/ProjectileSpawnpoint/MuzzleFlash")
 impact_effects = NodePath("ProjectileHitEffects")
+spread = 0.708
 damage = 0.5
-projectile_spawnpoint = NodePath("WeaponAnchor/ShotgunGraphic/ProjectileSpawnpoint")
+projectile_spawnpoint = NodePath("WeaponAnchor/anim_shotgun/ProjectileSpawnpoint")
 fire_timer = NodePath("FireTimer")
 fire_rate = 0.5
 metadata/_custom_type_script = "uid://pyxu55nhookm"
@@ -29,19 +85,24 @@ autostart = true
 [node name="WeaponAnchor" type="Marker2D" parent="." unique_id=471340787]
 position = Vector2(38, 5)
 
-[node name="ShotgunGraphic" type="Sprite2D" parent="WeaponAnchor" unique_id=1924386464]
-position = Vector2(18, -6)
-texture = ExtResource("4_owrpd")
+[node name="anim_shotgun" type="AnimatedSprite2D" parent="WeaponAnchor" unique_id=1390781395]
+unique_name_in_owner = true
+position = Vector2(-28, -2)
+sprite_frames = SubResource("SpriteFrames_0yd1l")
+animation = &"fire"
+frame = 1
+frame_progress = 0.860666
+flip_h = true
+script = SubResource("GDScript_owrpd")
 
-[node name="ProjectileSpawnpoint" type="Marker2D" parent="WeaponAnchor/ShotgunGraphic" unique_id=1161980563]
-position = Vector2(20, -10)
+[node name="ProjectileSpawnpoint" type="Marker2D" parent="WeaponAnchor/anim_shotgun" unique_id=1161980563]
+position = Vector2(7, -2)
 
-[node name="MuzzleFlash" type="Sprite2D" parent="WeaponAnchor/ShotgunGraphic/ProjectileSpawnpoint" unique_id=1478118810]
+[node name="MuzzleFlash" type="Sprite2D" parent="WeaponAnchor/anim_shotgun/ProjectileSpawnpoint" unique_id=1478118810]
 visible = false
 z_index = 10
-position = Vector2(4, -1)
 rotation = 0.7853982
-scale = Vector2(1.9999999, 1.9999999)
+scale = Vector2(0.16152251, 0.16152251)
 texture = ExtResource("5_sflqf")
 offset = Vector2(25, -25)
 hframes = 10
@@ -56,9 +117,11 @@ collision_mask = 3
 hit_from_inside = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=934029038]
-stream = ExtResource("4_qarfq")
+stream = SubResource("AudioStreamRandomizer_77nmb")
+volume_db = -10.0
 
 [node name="ProjectileHitEffects" type="Node2D" parent="." unique_id=1309495653 node_paths=PackedStringArray("effect_base")]
+scale = Vector2(0.6399058, 0.6399058)
 script = ExtResource("7_owrpd")
 effect_base = NodePath("HitSparks")
 randomize_h_flip = true
@@ -69,7 +132,7 @@ metadata/_custom_type_script = "uid://cxlpqv7vp5yq0"
 visible = false
 z_index = 10
 texture_filter = 1
-scale = Vector2(2, 2)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("8_m6nev")
 offset = Vector2(0, -10)
 hframes = 9

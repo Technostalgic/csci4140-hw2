@@ -4,14 +4,15 @@ extends CharacterBody2D
 signal die()
 
 @export var death_sound: AudioStream = null
+@export var hurt_timer: Timer = null
+@export var hurt_sfx: AudioStreamPlayer = null
 @export var camera: Camera2D = null
 @export var hurtbox: Area2D = null
 @export var health_bar: ProgressBar = null
 @export var gun: Gun = null
-@export var happy_boo: Node2D = null
 @export var movement_speed: float = 600
 @export var health: float = 100
-@export var knockback_decay: float = 5000
+@export var knockback_decay: float = 500
 
 var knockback_velocity = Vector2.ZERO
 var kills: int = 0
@@ -31,7 +32,7 @@ func _physics_process(delta: float) -> void:
 	)
 	velocity = movement * movement_speed + knockback_velocity
 	move_and_slide()
-	handle_animation()
+	
 	
 	# knockback velocity friction
 	if knockback_velocity.length_squared() > 1:
@@ -41,12 +42,18 @@ func _physics_process(delta: float) -> void:
 	
 	# handle damage from mobs
 	var bodies = hurtbox.get_overlapping_bodies()
+	var hurt: bool = false
 	for body in bodies:
 		if body is Mob:
+			hurt = true
 			health -= 5 * delta
-	
+			
 	if health <= 0:
 		kill()
+	
+	if hurt and hurt_timer.time_left <= 0:
+		hurt_sfx.play()
+		hurt_timer.start()
 	
 	# display health in progress bar
 	health_bar.value = health
@@ -73,12 +80,3 @@ func kill() -> void:
 	audio.finished.connect(audio.queue_free) # remove audio node when sound effect is done playing
 	get_tree().root.add_child(audio)
 	audio.play()
-
-func handle_animation():
-	# walk animation if moving
-	if velocity.length() > 1:
-		happy_boo.play_walk_animation()
-	
-	# idle animation if not moving
-	else: 
-		happy_boo.play_idle_animation()

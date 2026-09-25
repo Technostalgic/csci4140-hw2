@@ -1,27 +1,51 @@
 [gd_scene format=3 uid="uid://m08413nlk87o"]
 
-[ext_resource type="PackedScene" uid="uid://ogik4s70pgwl" path="res://obj/actors/slime/slime.tscn" id="1_q4fka"]
 [ext_resource type="Script" uid="uid://w6agg6ufvwvr" path="res://src/actors/mob.gd" id="1_xtcgg"]
-[ext_resource type="PackedScene" uid="uid://dhmhmrth6rdce" path="res://obj/effects/smoke_explosion.tscn" id="2_5hqrb"]
+[ext_resource type="PackedScene" uid="uid://dqsedoqcv07tu" path="res://src/actors/small_zombie.tscn" id="2_evqus"]
+[ext_resource type="AudioStream" uid="uid://b23s00nj7exy5" path="res://content/sfx/Zombie-hurt.wav" id="4_3j0fn"]
 [ext_resource type="Texture2D" uid="uid://dk5b8a84a6n2h" path="res://content/gfx/ground_shadow.png" id="4_t8guv"]
+[ext_resource type="AudioStream" uid="uid://q468wxe2guru" path="res://content/sfx/Zombie-hurt 2.wav" id="5_qbh7d"]
+[ext_resource type="AudioStream" uid="uid://bhdk4wtbe7w53" path="res://content/sfx/Zombie-hurt 3.wav" id="6_vf7jv"]
+[ext_resource type="AudioStream" uid="uid://b6ieu262l84am" path="res://content/sfx/Zombie-hurt 4.wav" id="7_4p4n3"]
+[ext_resource type="AudioStream" uid="uid://cpyeqto7f8w5e" path="res://content/sfx/Zombie-hurt 5.wav" id="8_osbjo"]
+[ext_resource type="AudioStream" uid="uid://ck34snqmat2ep" path="res://content/sfx/Zombie-hurt 6.wav" id="9_12iiq"]
+[ext_resource type="AudioStream" uid="uid://unon17itletw" path="res://content/sfx/Zombie-hurt 7.wav" id="10_8ywpw"]
+[ext_resource type="AudioStream" uid="uid://btlgydn6tunf2" path="res://content/sfx/Zombie-hurt 8.wav" id="11_ur1x2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o3jbo"]
 radius = 46.389652
 
-[node name="Mob" type="CharacterBody2D" unique_id=1795532236 node_paths=PackedStringArray("slime_node")]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_5vl63"]
+streams_count = 8
+stream_0/stream = ExtResource("4_3j0fn")
+stream_1/stream = ExtResource("5_qbh7d")
+stream_2/stream = ExtResource("6_vf7jv")
+stream_3/stream = ExtResource("7_4p4n3")
+stream_4/stream = ExtResource("8_osbjo")
+stream_5/stream = ExtResource("9_12iiq")
+stream_6/stream = ExtResource("10_8ywpw")
+stream_7/stream = ExtResource("11_ur1x2")
+
+[node name="Mob" type="CharacterBody2D" unique_id=1795532236 node_paths=PackedStringArray("hurt_sfx")]
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_xtcgg")
-slime_node = NodePath("Slime")
-death_fx = ExtResource("2_5hqrb")
+hurt_sfx = NodePath("ZombieHurt")
 
-[node name="Slime" parent="." unique_id=2008890567 instance=ExtResource("1_q4fka")]
+[node name="small_zombie" parent="." unique_id=329959378 instance=ExtResource("2_evqus")]
+unique_name_in_owner = true
 
-[node name="Shadow" type="Sprite2D" parent="Slime" unique_id=285989835]
+[node name="Shadow" type="Sprite2D" parent="small_zombie" unique_id=285989835]
 modulate = Color(0, 0, 0, 0.2901961)
 z_index = -1
+position = Vector2(0, 7)
+scale = Vector2(0.16000101, 0.12000153)
 texture = ExtResource("4_t8guv")
 
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=1724985194]
-position = Vector2(0, -21)
+position = Vector2(0, -1)
+scale = Vector2(0.16000398, 0.20000046)
 shape = SubResource("CircleShape2D_o3jbo")
+
+[node name="ZombieHurt" type="AudioStreamPlayer2D" parent="." unique_id=748095517]
+stream = SubResource("AudioStreamRandomizer_5vl63")

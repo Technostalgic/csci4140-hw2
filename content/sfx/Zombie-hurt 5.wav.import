@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cpyeqto7f8w5e"
+path="res://.godot/imported/Zombie-hurt 5.wav-7833b2c371e81f18365d5e8296eed630.sample"
+
+[deps]
+
+source_file="res://content/sfx/Zombie-hurt 5.wav"
+dest_files=["res://.godot/imported/Zombie-hurt 5.wav-7833b2c371e81f18365d5e8296eed630.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

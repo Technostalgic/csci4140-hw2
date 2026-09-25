@@ -1,10 +1,16 @@
 [gd_scene format=3 uid="uid://dt4xwrmw805uf"]
 
 [ext_resource type="Script" uid="uid://b77tfnmyicptp" path="res://src/actors/hero.gd" id="1_0cirb"]
-[ext_resource type="PackedScene" uid="uid://pbmyh1qru7p" path="res://obj/actors/hero/happy_boo_graphic.tscn" id="1_780bu"]
-[ext_resource type="AudioStream" uid="uid://dsnsfw3ykcnpn" path="res://content/sfx/test.wav" id="2_bdwod"]
+[ext_resource type="AudioStream" uid="uid://btu4dho10ncka" path="res://content/sfx/Player-Death.wav" id="2_mjhdh"]
+[ext_resource type="PackedScene" uid="uid://bg3eycnbvate7" path="res://src/actors/player_char.tscn" id="3_bdwod"]
 [ext_resource type="Texture2D" uid="uid://dk5b8a84a6n2h" path="res://content/gfx/ground_shadow.png" id="3_hsbtt"]
 [ext_resource type="PackedScene" uid="uid://cwyjwkmbi18nf" path="res://obj/weapon/shotgun.tscn" id="5_bdwod"]
+[ext_resource type="AudioStream" uid="uid://fnui6oafdygq" path="res://content/sfx/Player-Hurt.wav" id="6_mjhdh"]
+[ext_resource type="AudioStream" uid="uid://phkttmsxl1hq" path="res://content/sfx/Player-Hurt 2.wav" id="7_1bnd1"]
+[ext_resource type="AudioStream" uid="uid://bcbb3ywmrhtlp" path="res://content/sfx/Player-Hurt 3.wav" id="8_n61b6"]
+[ext_resource type="AudioStream" uid="uid://c7pk3rlmfflje" path="res://content/sfx/Player-Hurt 4.wav" id="9_bv8ae"]
+[ext_resource type="AudioStream" uid="uid://bb418sq7xrnxo" path="res://content/sfx/Player-Hurt 5.wav" id="10_325op"]
+[ext_resource type="AudioStream" uid="uid://be8u3l30e0fey" path="res://content/sfx/Player-Hurt 6.wav" id="11_jrnx6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_i738u"]
 radius = 40.04997
@@ -19,23 +25,42 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[node name="Hero" type="CharacterBody2D" unique_id=319609223 node_paths=PackedStringArray("hurtbox", "health_bar", "happy_boo")]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_bdwod"]
+streams_count = 6
+stream_0/stream = ExtResource("6_mjhdh")
+stream_1/stream = ExtResource("7_1bnd1")
+stream_2/stream = ExtResource("8_n61b6")
+stream_3/stream = ExtResource("9_bv8ae")
+stream_4/stream = ExtResource("10_325op")
+stream_5/stream = ExtResource("11_jrnx6")
+
+[node name="Hero" type="CharacterBody2D" unique_id=319609223 node_paths=PackedStringArray("hurt_timer", "hurt_sfx", "hurtbox", "health_bar", "gun")]
 script = ExtResource("1_0cirb")
-death_sound = ExtResource("2_bdwod")
+death_sound = ExtResource("2_mjhdh")
+hurt_timer = NodePath("hurt_timer")
+hurt_sfx = NodePath("HurtSfx")
 hurtbox = NodePath("Hurtbox")
 health_bar = NodePath("Healthbar")
-happy_boo = NodePath("HappyBoo")
+gun = NodePath("Shotgun")
+movement_speed = 200.0
 metadata/_custom_type_script = "uid://b77tfnmyicptp"
 
-[node name="HappyBoo" parent="." unique_id=1091727253 instance=ExtResource("1_780bu")]
+[node name="hurt_timer" type="Timer" parent="." unique_id=616403945]
+wait_time = 0.5
+one_shot = true
+autostart = true
 
-[node name="Shadow" type="Sprite2D" parent="HappyBoo" unique_id=733307799]
+[node name="player_char" parent="." unique_id=1330621787 instance=ExtResource("3_bdwod")]
+
+[node name="Shadow" type="Sprite2D" parent="player_char" unique_id=733307799]
 modulate = Color(0, 0, 0, 0.2901961)
 z_index = -1
+position = Vector2(0, 9)
+scale = Vector2(0.1999993, 0.11999956)
 texture = ExtResource("3_hsbtt")
 
 [node name="Hurtbox" type="Area2D" parent="." unique_id=50691794]
-visible = false
+scale = Vector2(0.23999941, 0.23999941)
 collision_layer = 0
 collision_mask = 2
 
@@ -44,19 +69,23 @@ shape = SubResource("CircleShape2D_i738u")
 debug_color = Color(0.9882353, 0.2509804, 0.32941177, 0.41960785)
 
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=748135381]
-visible = false
+scale = Vector2(0.3110705, 0.3110705)
 shape = SubResource("CircleShape2D_o3jbo")
 
 [node name="Shotgun" parent="." unique_id=1448111750 node_paths=PackedStringArray("hero") instance=ExtResource("5_bdwod")]
-position = Vector2(0, -32)
+rotation = -0.00012419079
 hero = NodePath("..")
 
 [node name="Healthbar" type="ProgressBar" parent="." unique_id=249806137]
 anchors_preset = -1
-offset_left = -100.0
-offset_top = -166.0
-offset_right = 100.0
-offset_bottom = -139.0
+offset_left = -11.0
+offset_top = -17.0
+offset_right = 189.0
+offset_bottom = 10.0
+scale = Vector2(0.11999875, 0.11999875)
 theme_override_styles/fill = SubResource("StyleBoxFlat_t4k1q")
 value = 100.0
 show_percentage = false
+
+[node name="HurtSfx" type="AudioStreamPlayer" parent="." unique_id=1621952893]
+stream = SubResource("AudioStreamRandomizer_bdwod")

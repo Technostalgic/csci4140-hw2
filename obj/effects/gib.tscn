@@ -60,21 +60,24 @@ spread = 180.0
 initial_velocity_min = 89.6
 initial_velocity_max = 210.98
 velocity_limit_curve = SubResource("CurveTexture_nq7gb")
-gravity = Vector3(0, 1000, 0)
-scale_min = 6.0
-scale_max = 6.0
+gravity = Vector3(0, 50, 0)
+scale_min = 0.5
+scale_max = 0.5
 scale_curve = SubResource("CurveXYZTexture_fgmwk")
 scale_over_velocity_curve = SubResource("CurveXYZTexture_bucga")
 color = Color(0.63, 0, 0, 1)
 
 [node name="Gib" type="Node2D" unique_id=438570077 node_paths=PackedStringArray("graphic", "particles", "shadow")]
+scale = Vector2(0.24000001, 0.24000001)
 script = ExtResource("1_qxmd0")
 graphic = NodePath("Gfx")
 particles = NodePath("Gfx/Particles")
 shadow = NodePath("Shadow")
+radius = 2.0
 metadata/_custom_type_script = "uid://bjmmx7p55ekty"
 
 [node name="Gfx" type="Node2D" parent="." unique_id=17173877]
+scale = Vector2(0.5, 0.5)
 
 [node name="Particles" type="GPUParticles2D" parent="Gfx" unique_id=2037462809]
 amount = 40
@@ -97,4 +100,5 @@ default_color = Color(0.2509804, 0, 0, 1)
 [node name="Shadow" type="Sprite2D" parent="." unique_id=1537627058]
 modulate = Color(0, 0, 0, 0.2509804)
 show_behind_parent = true
+scale = Vector2(0.65, 0.65)
 texture = ExtResource("2_rwf8g")
