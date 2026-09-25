@@ -7,11 +7,11 @@
 [ext_resource type="Script" uid="uid://sddcy6p5b3je" path="res://src/effects/gib_effects.gd" id="3_psfqy"]
 [ext_resource type="PackedScene" uid="uid://bqphum5xcynl1" path="res://obj/effects/gib.tscn" id="4_1nq40"]
 [ext_resource type="AudioStream" uid="uid://dsnsfw3ykcnpn" path="res://content/sfx/test.wav" id="4_08rg1"]
-[ext_resource type="AudioStream" uid="uid://g5j5576qqned" path="res://content/sfx/AiHolocaust.wav" id="5_1nq40"]
 [ext_resource type="Script" uid="uid://cxlpqv7vp5yq0" path="res://src/effects/effect_spawner.gd" id="5_gmrog"]
 [ext_resource type="PackedScene" uid="uid://imwl73wa0p84" path="res://zombie_neighborhood.tscn" id="5_ntfxu"]
 [ext_resource type="Texture2D" uid="uid://dk5b8a84a6n2h" path="res://content/gfx/ground_shadow.png" id="6_77nmb"]
 [ext_resource type="Script" uid="uid://5fmm6wlhmjkl" path="res://src/effects/fade_visual.gd" id="6_s1hb5"]
+[ext_resource type="AudioStream" uid="uid://cwniqtloe1bpi" path="res://content/sfx/zombiessss-main-demo1.wav" id="13_ntfxu"]
 
 [sub_resource type="Curve2D" id="Curve2D_u44n3"]
 _data = {
@@ -164,6 +164,7 @@ cubic_interp = false
 loop = false
 
 [node name="zombie_neighborhood" parent="." unique_id=1605390774 instance=ExtResource("5_ntfxu")]
+z_index = -100
 position = Vector2(-171, 290)
 
 [node name="SpawnTimer" type="Timer" parent="." unique_id=920829315]
@@ -171,7 +172,7 @@ wait_time = 0.3
 autostart = true
 
 [node name="Music" type="AudioStreamPlayer" parent="." unique_id=1714095164]
-stream = ExtResource("5_1nq40")
+stream = ExtResource("13_ntfxu")
 autoplay = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=2084507616]

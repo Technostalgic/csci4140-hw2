@@ -2,11 +2,16 @@
 
 [ext_resource type="Script" uid="uid://pyxu55nhookm" path="res://src/weapon/shotgun.gd" id="1_36h01"]
 [ext_resource type="Texture2D" uid="uid://c7cibhjd82kdi" path="res://content/tiles/PostApocalypse_AssetPack_v1.1.2/Character/Guns/Shotgun/Shotgun_side-left_shoot-Sheet3.png" id="3_owrpd"]
-[ext_resource type="AudioStream" uid="uid://dsnsfw3ykcnpn" path="res://content/sfx/test.wav" id="4_qarfq"]
+[ext_resource type="AudioStream" uid="uid://bvfr34joqgh35" path="res://content/sfx/SHOTGUN BLAST.wav" id="5_gnk66"]
 [ext_resource type="Texture2D" uid="uid://hd1526c0aud8" path="res://content/gfx/shotgun_blast.png" id="5_sflqf"]
 [ext_resource type="Script" uid="uid://dahw6ijlago88" path="res://src/effects/sprite_animator.gd" id="6_kocch"]
+[ext_resource type="AudioStream" uid="uid://cybq3nixqgxme" path="res://content/sfx/SHOTGUN BLAST 2.wav" id="6_u5rls"]
 [ext_resource type="Script" uid="uid://cxlpqv7vp5yq0" path="res://src/effects/effect_spawner.gd" id="7_owrpd"]
+[ext_resource type="AudioStream" uid="uid://cjcsqj3unpvwl" path="res://content/sfx/SHOTGUN BLAST 3.wav" id="7_ujt8h"]
+[ext_resource type="AudioStream" uid="uid://cs6wblw0uov6f" path="res://content/sfx/SHOTGUN BLAST 4.wav" id="8_6wp3m"]
 [ext_resource type="Texture2D" uid="uid://bg4ubxv7rj0vm" path="res://content/gfx/projectile_sparks.png" id="8_m6nev"]
+[ext_resource type="AudioStream" uid="uid://c0ap8vb7dbybu" path="res://content/sfx/SHOTGUN BLAST 5.wav" id="9_et70x"]
+[ext_resource type="AudioStream" uid="uid://clm2qa8so4xxa" path="res://content/sfx/SHOTGUN BLAST 6.wav" id="10_4ekrf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m6nev"]
 atlas = ExtResource("3_owrpd")
@@ -43,11 +48,6 @@ script/source = "extends AnimatedSprite2D
 @onready var shotgun = %anim_shotgun
 
 func _process(delta: float) -> void:
-	var mouse_position = get_global_mouse_position()
-	if mouse_position.x > position.x:
-		flip_h = true
-	elif mouse_position.x < position.x:
-		flip_h = false
 	
 	if Input.is_action_just_pressed(\"Shoot\"):
 		shotgun.play(\"fire\")
@@ -55,10 +55,18 @@ func _process(delta: float) -> void:
 		shotgun.stop()
 "
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_77nmb"]
+streams_count = 6
+stream_0/stream = ExtResource("5_gnk66")
+stream_1/stream = ExtResource("6_u5rls")
+stream_2/stream = ExtResource("7_ujt8h")
+stream_3/stream = ExtResource("8_6wp3m")
+stream_4/stream = ExtResource("9_et70x")
+stream_5/stream = ExtResource("10_4ekrf")
+
 [node name="Shotgun" type="Node2D" unique_id=1703651934 node_paths=PackedStringArray("audio_player", "raycast", "muzzle_flash", "impact_effects", "projectile_spawnpoint", "fire_timer")]
 texture_filter = 1
 script = ExtResource("1_36h01")
-shoot_sound = ExtResource("4_qarfq")
 audio_player = NodePath("AudioStreamPlayer")
 raycast = NodePath("Raycast")
 muzzle_flash = NodePath("WeaponAnchor/anim_shotgun/ProjectileSpawnpoint/MuzzleFlash")
@@ -79,19 +87,20 @@ position = Vector2(38, 5)
 
 [node name="anim_shotgun" type="AnimatedSprite2D" parent="WeaponAnchor" unique_id=1390781395]
 unique_name_in_owner = true
-position = Vector2(-23, 0)
+position = Vector2(-28, -2)
 sprite_frames = SubResource("SpriteFrames_0yd1l")
 animation = &"fire"
 frame = 1
 frame_progress = 0.860666
+flip_h = true
 script = SubResource("GDScript_owrpd")
 
 [node name="ProjectileSpawnpoint" type="Marker2D" parent="WeaponAnchor/anim_shotgun" unique_id=1161980563]
-position = Vector2(15, -16)
+position = Vector2(7, -2)
 
 [node name="MuzzleFlash" type="Sprite2D" parent="WeaponAnchor/anim_shotgun/ProjectileSpawnpoint" unique_id=1478118810]
+visible = false
 z_index = 10
-position = Vector2(-9, 12)
 rotation = 0.7853982
 scale = Vector2(0.16152251, 0.16152251)
 texture = ExtResource("5_sflqf")
@@ -108,7 +117,7 @@ collision_mask = 3
 hit_from_inside = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=934029038]
-stream = ExtResource("4_qarfq")
+stream = SubResource("AudioStreamRandomizer_77nmb")
 
 [node name="ProjectileHitEffects" type="Node2D" parent="." unique_id=1309495653 node_paths=PackedStringArray("effect_base")]
 scale = Vector2(0.6399058, 0.6399058)

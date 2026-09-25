@@ -19,11 +19,12 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[node name="Hero" type="CharacterBody2D" unique_id=319609223 node_paths=PackedStringArray("hurtbox", "health_bar")]
+[node name="Hero" type="CharacterBody2D" unique_id=319609223 node_paths=PackedStringArray("hurtbox", "health_bar", "gun")]
 script = ExtResource("1_0cirb")
 death_sound = ExtResource("2_bdwod")
 hurtbox = NodePath("Hurtbox")
 health_bar = NodePath("Healthbar")
+gun = NodePath("Shotgun")
 movement_speed = 200.0
 metadata/_custom_type_script = "uid://b77tfnmyicptp"
 

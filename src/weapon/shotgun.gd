@@ -2,7 +2,6 @@ class_name Shotgun
 extends Gun
 
 @export var hero: Hero = null
-@export var shoot_sound: AudioStream = null
 @export var audio_player: AudioStreamPlayer = null
 @export var raycast: RayCast2D = null
 @export var muzzle_flash: SpriteAnimator = null
@@ -19,7 +18,6 @@ var _cur_trail_index: int = 0
 
 func _ready() -> void:
 	super._ready()
-	audio_player.stream = shoot_sound
 	_pool_trails()
 
 func _process(delta: float) -> void:
@@ -30,7 +28,7 @@ func _pool_trails() -> void:
 	_cur_trail_index = 0
 	for i in range(10):
 		var trail = Line2D.new()
-		trail.width = 3
+		trail.width = 0.5
 		trail.default_color = Color("gold")
 		trail.points = PackedVector2Array([
 			Vector2.ZERO,
@@ -91,7 +89,7 @@ func _fire_shot(direction: float):
 	var trail = get_trail()
 	trail.global_position = muzzle_flash.global_position
 	trail.global_rotation = direction
-	trail.scale.x = 50
+	trail.scale.x = trail_length
 	trail.modulate.a = 1
 
 func fire():

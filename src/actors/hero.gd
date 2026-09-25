@@ -8,7 +8,6 @@ signal die()
 @export var hurtbox: Area2D = null
 @export var health_bar: ProgressBar = null
 @export var gun: Gun = null
-@export var happy_boo: Node2D = null
 @export var movement_speed: float = 600
 @export var health: float = 100
 @export var knockback_decay: float = 5000
