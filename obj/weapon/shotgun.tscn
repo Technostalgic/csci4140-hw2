@@ -87,12 +87,11 @@ frame_progress = 0.860666
 script = SubResource("GDScript_owrpd")
 
 [node name="ProjectileSpawnpoint" type="Marker2D" parent="WeaponAnchor/anim_shotgun" unique_id=1161980563]
-position = Vector2(38, -16)
+position = Vector2(15, -16)
 
 [node name="MuzzleFlash" type="Sprite2D" parent="WeaponAnchor/anim_shotgun/ProjectileSpawnpoint" unique_id=1478118810]
-visible = false
 z_index = 10
-position = Vector2(-30.999996, 13.999998)
+position = Vector2(-9, 12)
 rotation = 0.7853982
 scale = Vector2(0.16152251, 0.16152251)
 texture = ExtResource("5_sflqf")

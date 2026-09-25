@@ -1,0 +1,89 @@
+[gd_scene format=3 uid="uid://eswee1t36aud"]
+
+[ext_resource type="Script" uid="uid://t7c78tuhvr0q" path="res://content/main_menu.gd" id="1_l1m5s"]
+[ext_resource type="Texture2D" uid="uid://bu2x3ek15s2yi" path="res://content/tiles/clouds1.png" id="1_udbfj"]
+[ext_resource type="FontFile" uid="uid://hces81iioxnn" path="res://content/gfx/font/HelpMe.ttf" id="2_l1m5s"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0yd1l"]
+texture = ExtResource("1_udbfj")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u7mw5"]
+bg_color = Color(0.32388458, 0.2495845, 0.126607, 1)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
+[node name="main_menu" type="Control" unique_id=1512087246]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_l1m5s")
+
+[node name="background_image" type="Panel" parent="." unique_id=249401329]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(48.114517, 27.074522)
+theme_override_styles/panel = SubResource("StyleBoxTexture_0yd1l")
+
+[node name="menu_buttons" type="VBoxContainer" parent="." unique_id=1336343190]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -193.0
+offset_top = 168.0
+offset_right = 217.0
+offset_bottom = 315.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="menu_buttons" unique_id=1457890491]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.28889078, 0.11230715, 0.051877104, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.7632524, 0.19794503, 0.17250502, 1)
+theme_override_fonts/font = ExtResource("2_l1m5s")
+theme_override_font_sizes/font_size = 121
+theme_override_styles/normal = SubResource("StyleBoxFlat_u7mw5")
+text = "Start"
+
+[node name="Label" type="Label" parent="." unique_id=1082382864]
+layout_mode = 0
+offset_left = 161.0
+offset_top = 138.0
+offset_right = 1797.0
+offset_bottom = 316.0
+theme_override_colors/font_color = Color(0.638245, 0.6382269, 9.62615e-07, 1)
+theme_override_fonts/font = ExtResource("2_l1m5s")
+theme_override_font_sizes/font_size = 156
+text = "ZOMBIE SURVIVORS!"
+
+[node name="Label2" type="Label" parent="." unique_id=128309924]
+layout_mode = 0
+offset_left = 931.0
+offset_top = 884.0
+offset_right = 1024.0
+offset_bottom = 907.0
+theme_override_fonts/font = ExtResource("2_l1m5s")
+text = "Controls:"
+
+[node name="Label" type="Label" parent="Label2" unique_id=1175048727]
+layout_mode = 0
+offset_left = -53.0
+offset_top = 32.0
+offset_right = 149.0
+offset_bottom = 107.0
+theme_override_fonts/font = ExtResource("2_l1m5s")
+text = "WASD - Movement
+Left Mouse - Shoot
+Mouse Rotation - Aim"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="menu_buttons/Button" to="." method="_on_button_pressed"]

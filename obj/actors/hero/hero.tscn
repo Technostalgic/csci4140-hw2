@@ -36,7 +36,7 @@ scale = Vector2(0.1999993, 0.11999956)
 texture = ExtResource("3_hsbtt")
 
 [node name="Hurtbox" type="Area2D" parent="." unique_id=50691794]
-visible = false
+scale = Vector2(0.23999941, 0.23999941)
 collision_layer = 0
 collision_mask = 2
 
@@ -45,7 +45,7 @@ shape = SubResource("CircleShape2D_i738u")
 debug_color = Color(0.9882353, 0.2509804, 0.32941177, 0.41960785)
 
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=748135381]
-visible = false
+scale = Vector2(0.3110705, 0.3110705)
 shape = SubResource("CircleShape2D_o3jbo")
 
 [node name="Shotgun" parent="." unique_id=1448111750 node_paths=PackedStringArray("hero") instance=ExtResource("5_bdwod")]

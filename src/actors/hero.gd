@@ -44,6 +44,7 @@ func _physics_process(delta: float) -> void:
 	for body in bodies:
 		if body is Mob:
 			health -= 5 * delta
+		
 	
 	if health <= 0:
 		kill()

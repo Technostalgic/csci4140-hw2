@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://m08413nlk87o"]
 
-[ext_resource type="PackedScene" uid="uid://ogik4s70pgwl" path="res://obj/actors/slime/slime.tscn" id="1_q4fka"]
 [ext_resource type="Script" uid="uid://w6agg6ufvwvr" path="res://src/actors/mob.gd" id="1_xtcgg"]
+[ext_resource type="PackedScene" uid="uid://dqsedoqcv07tu" path="res://src/actors/small_zombie.tscn" id="2_evqus"]
 [ext_resource type="Texture2D" uid="uid://dk5b8a84a6n2h" path="res://content/gfx/ground_shadow.png" id="4_t8guv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o3jbo"]
@@ -11,18 +11,19 @@ radius = 46.389652
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_xtcgg")
-slime_node = NodePath("Slime")
-movement_speed = 175.99
+slime_node = NodePath("")
 
-[node name="Slime" parent="." unique_id=2008890567 instance=ExtResource("1_q4fka")]
-scale = Vector2(0.24000001, 0.24000001)
+[node name="small_zombie" parent="." unique_id=329959378 instance=ExtResource("2_evqus")]
+unique_name_in_owner = true
 
-[node name="Shadow" type="Sprite2D" parent="Slime" unique_id=285989835]
+[node name="Shadow" type="Sprite2D" parent="small_zombie" unique_id=285989835]
 modulate = Color(0, 0, 0, 0.2901961)
 z_index = -1
+position = Vector2(0, 7)
+scale = Vector2(0.16000101, 0.12000153)
 texture = ExtResource("4_t8guv")
 
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=1724985194]
-position = Vector2(0, -8)
-scale = Vector2(0.32000214, 0.32000062)
+position = Vector2(0, -1)
+scale = Vector2(0.16000398, 0.20000046)
 shape = SubResource("CircleShape2D_o3jbo")
