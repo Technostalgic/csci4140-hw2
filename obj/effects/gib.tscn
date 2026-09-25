@@ -68,6 +68,7 @@ scale_over_velocity_curve = SubResource("CurveXYZTexture_bucga")
 color = Color(0.63, 0, 0, 1)
 
 [node name="Gib" type="Node2D" unique_id=438570077 node_paths=PackedStringArray("graphic", "particles", "shadow")]
+scale = Vector2(0.24000001, 0.24000001)
 script = ExtResource("1_qxmd0")
 graphic = NodePath("Gfx")
 particles = NodePath("Gfx/Particles")
